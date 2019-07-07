@@ -1,0 +1,145 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TaloScope</title>
+     <!--Import Google Icon Font-->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!--Import materialize.css-->
+      <link type="text/css" rel="stylesheet" href="{% static 'css/materialize.min.css' %}"  media="screen,projection"/>
+        <link type="text/css" rel="stylesheet" href="{% static 'mystyle.css' %}"  media="screen,projection"/>
+    <script type="text/javascript" src="{% static 'js/materialize.min.js' %}"></script>
+</head>
+<body>
+  <nav style="">
+    <div class="nav-wrapper main-nav blue-grey darken-4">
+        {% if request.user.is_authenticated %}
+            <a href="{% url 'home' username=request.user.username %}" class="brand-logo left">
+            <img class="responsive-img" src="{% static 'images/images/taloscope6.png' %}" style="margin-left:30px;height:50px;" ></a>
+        {% else %}
+        <a href="{% url 'signin' %}" class="brand-logo left">
+            <img class="responsive-img" src="{% static 'images/images/taloscope6.png' %}" style="margin-left:30px;height:50px;" ></a>
+        {% endif %}
+        <form class="nav-form" method="post" action="/signin/">
+          <ul class="right nav-ul" style="display:inline-block;margin-right:70px;">
+              <li>
+                      {% csrf_token %}
+                      <div>
+          <input  name="username" placeholder="username" id="id_username" type="text">
+          <label class="label-icon" for="id_username"></label>
+          <!--<i class="material-icons cyan-text text-darken-4">close</i>-->
+                     </div>
+              </li>
+                  <li>
+                      <div>
+          <input  name="password" placeholder="password" id="id_password" type="password">
+          <label class="" for="id_password"></label>
+          <!--<i class="material-icons cyan-text text-darken-4">close</i>-->
+                     </div>
+              </li>
+              <li>
+                  <div style="margin-top:-2px;">
+                      <button style="height:40px !important;margin-top:px;" type="submit" class="btn waves-effect red lighten-2">Sign in</button>
+                  </div>
+              </li>
+          </ul>
+            </form>
+        </div>
+
+    </nav>
+<div class="container">
+<div class="row">
+    <div class="col s7">
+        <div class="col s12">
+        <blockquote><p class="flow-text">A better way to share your Skills</p>.
+            <h3 style="margin-top:-20px;" class="red-text text-lighten-2"><i>"Cuz you are more than just a piece of paper".</i></h3></blockquote>
+        </div>
+        <div class="col s9 teal-text text-darken-3 right" style="margin-right:60px !important;">
+            <ul class="registration-ul">
+                <li><p class="flow-text">Upload and share videos of your introduction,projects,skills or whatever you love to do</p></li>
+                <li><p class="flow-text">Connect and Grow with people with similar skills.See how they do it.</p></li>
+                <li><p class="flow-text">Create your portfolio and share with recruiters.No need to carry your resume around.</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="col s5" style="margin-top:50px;">
+    <div class="row z-depth-1" style="margin-top:0px;border:1px #eeeeee solid;padding:20px;">
+        <div class="col s12">
+        {% if messages %}
+            {% for k in messages %}
+            <div class="row red lighten-2 white-text">
+            <span style="padding:2px;">{{k}}</span>
+            </div>
+            {% endfor %}
+        {% endif %}
+            <p class="flow-text" style="margin-top:px;">Sign Up</p>
+        </div>
+        <div class="col s12">
+        <form method="post" action="/signup/" class="signup-form">
+                  {% csrf_token %}
+                <div class="row">
+                    <div class="col s6">
+                        <div class="input-field">
+                    <input placeholder="ankur.bhatia@fashion.com" name="email" id="id_email" type="email" class="validate">
+                    <label for="id_email" class="signup-label">Email</label>
+                </div>
+                    </div>
+                    <div class="col s6">
+                        <div class="input-field">
+                    <input placeholder="ankur" name="first_name" id="id_first_name" type="text" class="validate">
+                    <label for="id_first_name" class="signup-label">Name</label>
+                </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col s6">
+                         <div class="input-field">
+                    <input placeholder="ankur_fashion_tech" name="username" id="id_username_reg" type="text" class="validate">
+                    <label for="id_username_reg" class="signup-label">Username</label>
+                </div>
+                    </div>
+
+                    <!--<div class="col s6">
+                        <div class="input-field">
+                    <input placeholder="bhatia" name="second_name" id="id_last_name" type="text" class="validate">
+                    <label for="id_last_name">last name</label>
+                </div>
+                    </div>-->
+                     <div class="col s6">
+                         <div class="input-field">
+                    <input placeholder="password" name="password" id="id_password_reg" type="password" class="validate">
+                    <label for="id_password_reg" class="signup-label">Password</label>
+                </div>
+                    </div>
+                </div>
+                <div class="row">
+                </div>
+
+                <div class="input-field">
+                    <input placeholder="describe who you are e:g architect,chef,actor,student,consultant" name="description" id="id_description" type="text" class="validate">
+                    <label for="id_description" class="signup-label">What you do</label>
+                </div>
+
+                <div class="col s12 center-align">
+                    <button style="width:100%" class="btn waves-effect waves-light" type="submit" name="action">Sign up</button>
+                </div>
+                    </form>
+            <div class="row">
+                    <div class="col s6">
+                        <div class="">
+                            <a href="{% url 'signin' %}"><p class=""><b>Already a member? Sign in.</b></p></a>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

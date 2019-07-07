@@ -1,0 +1,279 @@
+{% extends 'dashboard/base.html' %}
+{% load staticfiles %}
+{% block title %}taloscope|{{request.user.username}}{% endblock %}
+{% block content %}
+<!----------------------------------------NAVIGATION ENDS----------------------------------->
+    <div class="row full-page">
+        <nav class="nav-center sticky teal darken-3 " style="">
+            <div class="nav-wrapper center-align " style="">
+                <ul class=" hide-on-med-down " style="margin-left:150px">
+                 <li class="center">
+                     <a id="home" href="{% url 'home' username=user.username %}"><i class="material-icons left ">cast</i><span>posts</span></a>
+                 </li>
+                <li>
+                    <a  href="{% url 'resume' username=profile.user.username %}" class="left-align"><i class="material-icons left ">school</i><span>resume</span></a>
+                </li>
+                <li class="share">
+            <a onclick="copyToClipboard('#p1')" class="share-button" style=""><i class="material-icons left">share</i>share </a>
+                </li>
+                <li class="right">
+                    <a href="{% url 'uploadskills' %}" class=""><i class="material-icons left ">present_to_all</i><span>Upload More Videos</span></a>
+                </li>
+                </ul>
+
+             </div>
+
+            </nav>
+        <div class="container">
+            <!----------------------SIDE PANEL ------------------------------>
+        <div class="col  center-align s3 z-depth-1 white" style="margin-top:10px;margin-left:20px;">
+                <div class="info">
+                    <div class="row">
+                        <div class="col 12 profile-box" style="margin-top:10px;margin-left:80px;">
+                            {% if user.profile.profile_image %}
+                   <img src="{{user.profile.profile_image.url}}" alt="" class="circle responsive-image" style="height:120px;width:120px;">
+                            <a href="{% url 'image_upload' username=user.username %}"><i class="material-icons tiny left"></i>change image</a>
+                            {% else %}
+                            <img src="{% static 'images/images/astro2.jpg' %}" alt="" class="circle responsive-img" style="height:120px;width:120px;">
+                            <a href="{% url 'image_upload' username=user.username %}"><i class="material-icons tiny left"></i>upload image</a>
+                            {% endif %}
+                            <!-- notice the "circle" class -->
+                        </div>
+                        <div class="col s12" style="margin-top:-20px;">
+                            <div class="" style="">
+                    <p class="name" style="">{{user.first_name}}</p>
+                    <p class="grey-text text-darken-2 who_are" style="">{{user.profile.description}}</p>
+                                <span class="btn-flat grey lighten-1"><i class="material-icons left">star_border</i>&nbsp;{{user.profile.followed_by.count}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    <div class="divider"></div>
+                    <!-----------About Me---------->
+                    <div class="about section left-align row" style="padding:10px;">
+                        <div class="col s12" style="">
+                        <span class="name" style="font-size:16px;font-weight:bold;"><!----<i class="material- left small">account_circle</i>------------------->
+                            About Me</span>
+                            <div class="more-icons">
+                                <a href="#" class="dropdown-trigger" data-target="dropdown1">
+                            <i class="icons teal-text material-icons" >more_horiz</i></a>
+                         <ul id='dropdown1' class='dropdown-content'>
+                             <li><a href="{% url 'edit_aboutme' pk=user.pk %}">
+edit about me</a></li>
+
+                         </ul>
+                        </div>
+                        </div>
+                        {% if not user.profile.about_me %}
+                        <div class="col about_col center">
+                             <div class="">
+                                <a href="{% url 'aboutme' pk=user.pk %}" class="waves-effect waves-teal btn-flat add_button">Add About you</a>
+                                </div>
+                        </div>
+                        {% else %}
+                            <div class="col s12 left-align grey-text text-darken-3 info-box">
+                                    <p class="">{{user.profile.about_me}}</p>
+                            </div>
+                        {% endif %}
+
+                    </div>
+                    <div class="divider"></div>
+                    <!--------SKILLS--------------->
+                    <div class="skills section left-align row" style="padding:10px;">
+                        <div class="col s12" style="">
+                        <span class="name" style="font-size:16px;font-weight:bold;"><!--<i class="material-icons small left">check_circle</i>-->Skills</span>
+                        <div class="more-icons">
+                                <a href="#" class="dropdown-trigger" data-target="dropdown2">
+
+                            <i class="icons  teal-text material-icons" >more_horiz</i></a>
+                         <ul id='dropdown2' class='dropdown-content'>
+                             <li><a href="{% url 'addskills'  %}">Add Skills</a></li>
+
+                         </ul>
+                        </div>
+                        </div>
+                        {% if not user.profile.skills_set.all %}
+                        <div class="row">
+                            <div class="col skill_col_empty">
+                                <a href="{% url 'addskills'  %}" class="waves-effect waves-teal btn-flat add_button">Add skills</a>
+                            </div>
+                        </div>
+                            {% else %}
+                            <div class="col s12  skill_col grey-text text-darken-3 info-box">
+                            {% for skill in user.profile.skills_set.all %}
+                                    <span class="left skill-box">{{skill.name}}<a href="{% url 'delete_skills' pk=skill.id %}" ><i class="tiny material-icons">clear</i></a></span>
+
+                            {% endfor %}
+                            </div>
+                            {% endif %}
+                    </div>
+                    <div class="divider"></div>
+                    <!--------CONTACT-------------->
+                    <div class="contact section left-align row" style="padding:10px;">
+                       <div class="col s12">
+                        <span class="name" style="font-size:16px;font-weight:bold;">Contacts</span>
+                        <div class="more-icons">
+                                <a href="" class="dropdown-trigger" data-target="dropdown3">
+
+                            <i class="icons  teal-text material-icons" >more_horiz</i></a>
+                         <ul id='dropdown3' class='dropdown-content'>
+                             {% if  not user.profile.profilecontact_set.all %}
+                             <li><a href="{% url 'addcontact'  %}">Add Contacts</a></li>
+                             {% else %}
+                             <li><a href="{% url 'edit_contact' pk=user.pk  %}">Edit Contacts</a></li>
+                             {% endif %}
+
+                         </ul>
+                        </div>
+                        </div>
+
+
+
+                        {% if  not user.profile.profilecontact_set.all %}
+                        <div class="row">
+                            <div class="col">
+                                <a href="{% url 'addcontact'  %}" class="waves-effect waves-teal btn-flat add_button">Add Phone and City</a>
+                            </div>
+                        </div>
+                        {% else %}
+                        {% for pro in user.profile.profilecontact_set.all %}
+
+                                <div class="col s6 contact-box">
+                                    <span class=""><i class="material-icons left tiny teal-text">phone</i>Phone</span>
+                                    </div>
+                                <div class="col s6 contact-box">
+<span>{% if pro.phone %}{{pro.phone}}{% else %}&nbsp;{% endif %}</span>
+                                    </div>
+                                <div class="col s6 contact-box">
+                                    <span class=""><i class="material-icons left tiny teal-text">domain</i>City</span>
+                                    </div>
+                                <div class="col s6 contact-box ">
+<span class="">{{pro.city}}</span>
+                                    </div>
+
+                        {% endfor %}
+
+                        {% endif %}
+
+                        <!--<div class="row">
+                                <div class="col s6 left-align skill_col">
+                                    <span class="skill_info">City</span>
+                                    </div>
+                                <div class="col s6 center-align skill_col">
+<span class="skill_info">Gurgaon,India</span>
+                                    </div>
+                                </div>-->
+                    </div>
+
+                </div>
+            </div>
+
+
+    <!----------------------Main Page-------------------------------------------->
+        <div class="col s8" style="margin-left:20px;margin-top:10px;">
+            <!-----------Video Section--------------->
+            {% if user.profile.post_set.all %}
+            {% for each in user.profile.post_set.all %}
+            {% if each.introduction %}
+            <div class="row video-col white">
+                <div class="col z-depth" style="padding:0;">
+                <video class="responsive-video" style="" controls>
+                    <source  src="{{each.video.url}}" type="video/mp4">
+                </video>
+
+                </div>
+                <div class="col s9 white valign-wrapper" style="">
+                        <p class="video_text_big">{{each.title|truncatechars:80}}</p>
+                </div>
+                    <div class="col s3 white right" style="margin-top:10px;">
+                        <div class="more-icons">
+                                <a href="" class="dropdown-trigger" data-target="dropdown4">
+
+                            <i class="icons material-icons small teal-text" >more_vert</i></a>
+                         <ul id='dropdown4' class='dropdown-content'>
+                             <li><a href="{% url 'edit_video' pk=each.pk %}">edit</a></li>
+                             <li><a href="{% url 'delete_video' pk=each.pk %}">delete</a></li>
+                         </ul>
+                        </div>
+
+                </div>
+
+
+            </div>
+
+            {% else %}
+            <div>
+                <div class="col s4 white">
+                    <div class="row">
+                        <div class="col">
+                    <video class="responsive-video left-align" style="padding:10px;width:100%;height:100%;" controls>
+                    <source  src="{{each.video.url}}" type="video/mp4">
+                </video>
+                        </div>
+                        <div class="col s9">
+                        <span style="padding-left:10px;">{{each.title|truncatechars:10}}
+                        </span>
+                        </div>
+                        <div class="col s3">
+                        <div class="more-icons">
+                                <a href="" class="dropdown-trigger" data-target="{{forloop.counter}}">
+
+                            <i class="icons tiny  material-icons black-text" >more_vert</i></a>
+                         <ul id='{{forloop.counter}}' class='dropdown-content'>
+                             <li><a href="{% url 'edit_video' pk=each.pk %}">edit</a></li>
+                             <li><a href="{% url 'delete_video' pk=each.pk %}">delete</a></li>
+                         </ul>
+                        </div>
+                        </div>
+
+                </div>
+            </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+                <div class="row">
+                    <div class="col s12 center-align"></div>
+                </div>
+            {% else %}
+                 <div class="" style="margin-left:20px;position:absolute;">
+                    <h1>Let Them Take A Note Of You !</h1>
+                    <h4>Introduce Yourself</h4>
+                        <a href="{% url 'uploadskills' %}" class="btn waves-effect red lighten-2 " type="submit" name="action">Upload Introduction Video</a>
+                        </div>
+                    <img style="margin-left:250px;margin-top:140px;hieght:50%;width:50%" class="circle responsive" src="{% static 'images/images/astronaut_home.jpg' %}">
+                {% endif %}
+
+         </div>
+    </div>
+            </div>
+<span hidden id="p1">{{ request.build_absolute_uri }}{{ object.get_absolute_url }}</span>
+<script>
+$(document).ready(function(){
+   $('.modal').modal();
+   $('.dropdown-trigger').dropdown();
+});
+
+function copyToClipboard(element) {
+  var $temp = $("<input>");
+  $("body").append($temp);
+  $temp.val($(element).text()).select();
+  document.execCommand("copy");
+  $temp.remove();
+}
+
+$(document).ready(function() {
+  // Bind click event on all the buttons inside .card
+  $(".share a").click(function() {
+
+    // Check if the clicked button has class `btn_s`
+    if ($(this).hasClass('share-button')) {
+      $(this).html('<i class="material-icons left">done</i>Link Copied').toggleClass('share-button copied-button');
+    } else {
+      $(this).html('<i class="material-icons left">share</i>share').toggleClass('copied-button share-button');
+    }
+  });
+});
+
+$("#home").focus();
+</script>
+</div>
+{% endblock %}

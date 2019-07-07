@@ -1,0 +1,60 @@
+{% extends 'dashboard/base.html' %}
+{% block title %}taloscope | search {% endblock %}
+{% block content %}
+<div class="container grey-darken-2 ">
+
+    <div class="row">
+       <div class="col s12 "><h4>Search By Name ,Description or Skills</h4></div>
+    </div>
+    <div class="row">
+          <form method="post" action="/search/">
+                      {% csrf_token %}
+                      <div class="input-field">
+          <input class="search" name="search" placeholder="search by name or skill" id="search" type="search">
+          <label class="" for="search"><i class="material-icons left">search</i></label>
+                          <div class="col s6 center offset-s3">
+            <button style="width:100%;" type="submit" class="waves-effect waves-light btn indigo darken-4"><i class="material-icons center">search</i>search</button>
+        </div>
+          <!--<i class="material-icons cyan-text text-darken-4">close</i>-->
+                     </div>
+          </form>
+    </div>
+
+<div class="row center">
+    <div class="message">
+    {% if messages %}
+    {% for k in messages %}
+    <ul>
+        <li style="color:red">{{k}}</li>
+    </ul>
+    {% endfor %}
+    {% endif %}
+</div>
+</div>
+<div class="row">
+    {% if match %}
+    {% for each in match %}
+    <div class="col s2 z-depth-1 white" style="padding:5px;margin:10px;">
+        <div class="row center">
+            <div class="col s12" style="">
+            <img src="{{each.profile_image.url}}" alt="" class="circle responsive-img" style="height:70px;width:70px;">
+            </div><!-- notice the "circle" class -->
+        <div class="col s12">
+            <p style="font-weight:bold">{{each.user.get_full_name}}</p>
+            <p style="margin-top:-20px;" class="grey-text">{{each.description}}</p>
+            <span style="margin-top:-10px;font-size:12px;">skilled in:&nbsp;</span>
+            {% for all in each.skills_set.all %}
+            <span style="font-size:12px;margin-top:-10px;">{{all.name|truncatechars:7}},</span>
+            {% endfor %}
+        </div>
+        <div class="col s12" style="margin-top:10px;">
+                <a href="{% url 'profile' username=each.user.username %}" class="btn  white-text">view profile</a>
+
+        </div>
+        </div>
+</div>
+    {% endfor %}
+    {% endif %}
+</div>
+</div>
+{% endblock %}

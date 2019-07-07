@@ -1,0 +1,42 @@
+{% extends 'dashboard/base.html' %}
+{% block title %}taloscope | video{% endblock %}
+{% block content %}
+<div class="container grey-darken-2 ">
+<div class="row" style="padding=10px;margin:10px;">
+      <div class="col center-align"><h4>Add A Great Video About Your Work,Skills or Whatever You Love</h4></div>
+          <form class="col s12 center-align" method="post" enctype="multipart/form-data">
+              {% csrf_token %}
+    <div class="file-field input-field">
+      <div class="btn">
+        <span>Select File</span>
+        <input name="video" type="file" value="{{post.video}}">
+      </div>
+      <div class="file-path-wrapper">
+        <input class="file-path validate" type="text" value="{{post.video.url}}">
+      </div>
+    </div>
+              <label>
+        <input type="checkbox" {% if post.introduction %} checked="checked" {% endif %} name="introduction" id="" value="on"/>
+        <span>Your Main Video</span>
+
+      </label>
+
+
+              <div class="input-field">
+                  <i class="material-icons prefix">edit</i>
+       <label for="id_title">Title</label>
+        <input name="title" type="text" id="id_title" value="{{post.title}}">
+    </div>
+                <div class="row">
+        <div class="col s12 center-align ">
+            <button style="width:100%;" type="submit" class="waves-effect waves-light btn indigo darken-4"><i class="material-icons center">file_upload</i>submit</button>
+        </div>
+    </div>
+          </form>
+      </div>
+</div>
+<!--<form method="POST">
+    {% csrf_token %}
+    {{form.as_p}}
+</form>-->
+{% endblock %}

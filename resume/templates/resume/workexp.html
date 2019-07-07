@@ -1,0 +1,65 @@
+
+{% extends 'dashboard/base.html' %}
+{% block title %}taloscope | workex{% endblock %}
+{% block content %}
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+  <!-- XDSoft DateTimePicker-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css" integrity="sha256-DOS9W6NR+NFe1fUhEE0PGKY/fubbUCnOfTje2JMDw3Y=" crossorigin="anonymous" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js" integrity="sha256-FEqEelWI3WouFOo2VWP/uJfs1y8KJ++FLh2Lbqc8SJk=" crossorigin="anonymous"></script>
+<div class="container grey-darken-2 ">
+<div class="row" style="padding:30px;margin:10px;">
+    <div class="row">
+      <div class="col center-align"><h4>Work Experience</h4></div>
+        </div>
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="row">
+        <div class="input-field">
+            <i class="material-icons prefix">location_city</i>
+    <label for="id_organisation">Organisation:</label> <input value="{{workex.organisation}}" type="text" name="organisation" maxlength="128" id="id_organisation" />
+        </div>
+    </div>
+     <div class="row">
+        <div class="input-field">
+            <i class="material-icons prefix">work</i>
+    <label for="id_designation">Designation:</label> <input type="text" name="designation" maxlength="128" id="id_designation" value="{{workex.designation}}"/>
+        </div>
+     </div>
+     <div class="row">
+        <div class="input-field">
+    {{ form.worked_from.errors }}
+            <i class="material-icons prefix">date_range</i>
+<label for="id_worked_from">Worked from:</label> <input type="text" name="worked_from" required id="id_worked_from" value="{{workex.worked_from|date:"Y-m-d"}}"/>
+        </div>
+     </div>
+     <div class="row">
+        <div class="input-field">
+            <i class="material-icons prefix">date_range</i>
+<label for="id_worked_till">Worked Till(select today's date if it is your current organisation):</label> <input type="text" name="worked_till"  id="id_worked_till" value="{{workex.worked_till|date:"Y-m-d"}}"/>
+        </div>
+     </div>
+     <div class="row">
+        <div class="">
+            <i class="material-icons prefix">edit</i>
+<label for="id_describe">Describe Your Work:</label> <textarea class="" name="describe" cols="40" rows="40" id="id_describe" value="">{{workex.describe}}
+</textarea>
+        </div>
+     </div>
+    <div class="row">
+        <div class="col s12 center-align ">
+            <button style="width:100%;" type="submit" class="waves-effect waves-light btn"><i class="material-icons center">file_upload</i>submit</button>
+        </div>
+    </div>
+</form>
+</div>
+</div>
+<script>
+    $(function () {
+      $("#id_worked_from,#id_worked_till").datetimepicker({format: 'Y-m-d',});
+    });
+  </script>
+{% endblock %}
+
+
+

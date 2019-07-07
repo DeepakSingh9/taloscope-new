@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="bio" align="center">
+{{bio.user}}<br>
+{{bio.description}}<br>
+{{bio.skills}}<br>
+{{bio.highest_degree}}<br>
+<a href="{% url 'edit_bio' pk=bio.pk %}">Edit Bio</a>
+    </div>
+<hr>
+<div class="cert" align="center">
+<ul>
+{% for certificate in bio.certification_set.all  %}
+    <li>{{certificate.title}}</li>
+    <li>{{certificate.year}}</li>
+    <li>{{certificate.description}}</li>
+    <li>{{certification.link}}</li>
+    {%if certification.cert_image%}
+    <li><img src="{{certificate.cert_image.url}}" alt="not found"></li>
+    {% else %}
+    <p>Not found</p>
+    {% endif %}
+    <a href="{% url 'delete_certification' pk=certificate.pk %}">Delete certification</a>
+    <a href="{% url 'edit_certification' pk=certificate.pk %}">Edit certication</a>
+    </ul>
+{% endfor %}
+<a href="{%url 'certification' %}">Add certification</a>
+</div>
+<hr>
+<div class="interest" align="center">
+<h3>interest</h3>
+{% for interest in bio.interest_set.all %}
+<li>{{interest.name}}</li>
+{% endfor %}
+
+</div>
+<div class="workex" align="center">
+<hr>
+<h3>workex</h3>
+<ul>
+{% for work in bio.workexperience_set.all %}
+<li>{{work.organisation}}</li>
+<li>{{work.designation}}</li>
+<li>{{work.describe}}</li>
+    <a href="{% url 'delete_workexp' pk=work.pk %}">delete Workex</a>
+    <a href="{%url 'edit_workexp' pk=work.pk %}">Edit workex</a>
+
+{% endfor %}
+</ul>
+<a href="{% url 'workexp' %}">Add Work</a>
+</div>
+<hr>
+<div class="project" align="center">
+
+
+<h3>Projects</h3>
+<ul>
+    {% for project in bio.project_set.all %}
+    <li>{{project.title}}</li>
+    <li>{{project.year}}</li>
+    <li>{{project.link}}</li>
+    <li>{{project.description}}</li>
+    <li>{{project.organisation}}</li>
+
+    <a href="{% url 'edit_project' pk=project.pk %}">Edit Project</a>
+    <a href="{%url 'delete_project' pk=project.pk %}">Delete project</a>
+    {% endfor %}
+</ul>
+<a href="{%url 'project' %}">Add Project</a>
+    </div>
+</body>
+</html>

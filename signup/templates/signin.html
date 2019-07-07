@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}TaloScope{% endblock %}
+{% block content %}
+<div class="container">
+<div class="row">
+    <div class="col s4 offset-s3" style="margin-top:50px;border:0.2px solid #eeeeee;">
+        <div class="row">
+            <div class="col s12">
+                {% if messages %}
+            {% for k in messages %}
+            <div class="col s12 red lighten-2 white-text">
+            <span style="padding:2px;">{{k}}</span>
+            </div>
+            {% endfor %}
+            {% endif %}
+        <div class="col s6">
+            <p class="flow-text" style="">Sign In</p>
+        </div>
+        <div class="col s6 ">
+            <a href="{% url 'signup' %}"><button style="margin-top:20px;" class="btn waves-effect red lighten-2">Sign Up</button></a>
+        </div>
+                </div>
+        </div>
+    <div class="row">
+        <div class="col s12">
+            <form method="post" action="/signin/">
+                {% csrf_token %}
+                <div class="col s12 input-field">
+                    <input type="text" name="username" id="id_username">
+                    <label for="id_username" class="signup-label">username</label>
+                </div>
+                <div class="col s12 input-field">
+                    <input type="password" name="password" id="id_password" class="signup-label">
+                    <label for="id_password">password</label>
+                </div>
+                   <div class="">
+        <div class="col s12 center-align ">
+            <button style="width:100%;" type="submit" class="waves-effect waves-light btn ">sign in</button>
+        </div>
+    </div>
+            </form>
+        </div>
+    </div>
+
+
+    <div class="row ">
+        <div class="col s6 left-align">
+            <a  href="{% url 'password_reset' %}"><p style="margin-left:10px;"><b>Forgot password?</b></p></a>
+        </div>
+        <div class="col s3">
+        </div>
+    </div>
+
+
+    </div>
+    <div class="col s4" style="margin-top:50px;">
+        <img src="{% static 'images/images/astronautlogin.png' %}" style="height:100%;width:100%">
+    </div>
+</div>
+</div>
+{% endblock %}

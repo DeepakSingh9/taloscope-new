@@ -1,0 +1,155 @@
+{% extends 'dashboard/base.html' %}
+{% block content %}
+<div class="row">
+
+<!-- Page Container -->
+<div class="col s3 z-depth center-align grey lighten-3" style="margin-top:10px;margin-left:40px;">
+        <!--<div class="w3-container">-->
+             {% if user.is_authenticated %}
+             {% if user.profile.profile_image %}
+         <p class="center-align"><img src="{{user.profile.profile_image.url}}" class="circle" style="width:150px;height:150px;" alt="Avatar"></p>
+    <h6 class="name"><span class="center-align">{{user.get_full_name}}</span></h6>
+            <p class="name">{{user.profile.description}}</p>
+             {% else %}
+            <a href="{% url 'image_upload' pk=user.pk %}">upload image</a>
+            <h5>{{user.first_name}}{{user.last_name}}</h5>
+
+            {% endif %}
+            {% endif %}
+
+            {% if user.is_authenticated %}
+            {% endif %}
+     <div class="divider"></div>
+<!--ABOUT ME---->
+       <div class="section">
+         {% if not user.profile.about_me %}
+         <blockquote><a href="{% url 'aboutme' pk=user.pk %}">Add About You</a></blockquote>
+         {% else %}
+           <p class="center-align"><i class="tiny material-icons center-align">account_box</i>ABOUT ME</p>
+           <p class="">{{user.profile.about_me}} <a href="{% url 'edit_aboutme' pk=user.pk %}"><i class="material-icons">create</i></a></p>
+         {% endif %}
+      </div>
+<!--CONTACT--->
+
+        <span onclick="this.parentElement.style.display='none'" class="w3-button w3-theme-l3 w3-display-topright">
+          <i class="fa fa-remove"></i>
+        </span>
+           <p class="center-align"><i class="tiny material-icons ">edit_location</i>CONTACT ME</p>
+           <p><i class="tiny material-icons">email</i>{{user.email}}</p>
+         {% if  user.profile.profilecontact_set.all %}
+           {% for pro in user.profile.profilecontact_set.all %}
+           <p><i class="tiny material-icons">phone</i>{{pro.phone}}<a href="{% url 'edit_contact' pk=user.pk %}"><i class="material-icons">edit</i></a></p>
+
+           {% endfor %}
+         <p><strong><a href="{% url 'addcontact'  %}">Add Contact</a></strong></p>
+
+         {% else %}
+
+          <p><strong><a href="{% url 'addcontact'  %}">Add Contact</a></strong></p>
+
+         {% endif %}
+
+
+<!---------------------Skills------------------------------------------------------------------------>
+        <div class="section">
+        <div class="w3-container w3-display-container w3-round w3-theme-l4 w3-border w3-theme-border w3-margin-bottom w3-hide-small">
+        <span onclick="this.parentElement.style.display='none'" class="w3-button w3-theme-l3 w3-display-topright">
+          <i class="fa fa-remove"></i>
+        </span>
+
+         {% if not user.profile.skills_set.all %}
+         <p><strong><a href="{% url 'addskills'  %}">Add skills</a></strong></p>
+         {% else %}
+            <p class="center-align"><i class="tiny material-icons center-align">stars</i>SKILLS</p>
+        {% for skill in user.profile.skills_set.all %}
+            <p>{{skill.name}}<a href="{% url 'delete_skills' pk=skill.id %}"><i class="material-icons">delete this</i></a><a href="{% url 'edit_skills' pk=skill.id %}"><i class="material-icons float-left">edit this</i></a></p>
+            {% endfor %}
+         <p><strong><a href="{% url 'addskills'  %}">Add skills</a></strong></p>
+
+         {% endif %}
+      </div>
+        </div>
+<!--------------------------------contact----------------------------------------------------------->
+
+    <!-- End Left Column -->
+  </div>
+<div class="col s7 grey lighten-3" style="margin-top:10px;margin-left:50px;">
+        <div class="divider"></div>
+                <h5 class="left-align">workex</h5>
+    <div class="section">
+        <div class="row">
+            <div class="workex">
+            {% for work in bio.workexperience_set.all %}
+                <div class="col s3 work_date">{{work.worked_from|date:"F Y"}}-{{work.worked_till|date:"F Y"}}</div>
+                <div class="col s9 left-align">
+                    <span class="work_org">{{work.designation}}</span>&nbsp at &nbsp<span class="work_org">{{work.organisation}}</span>
+                    <p><span class="description">{{work.describe}}</span></p>
+                    <a href="{% url 'delete_workexp' pk=work.pk %}">delete Workex</a>
+                    <a href="{%url 'edit_workexp' pk=work.pk %}">Edit workex</a>
+               </div>
+            {% endfor %}
+        </div>
+            <a href="{% url 'workexp' %}">Add Work</a>
+        </div>
+    </div>
+    <div class="divider"></div>
+    <h5 class="left-align">Education</h5>
+<div class="section">
+    <div class="row">
+        <div class="col s3 work_date">{{bio.education_from}}</div>
+<div class="col s9 left-align">
+    <span class="work_org">{{bio.highest_degree}}</span>
+<a href="{% url 'edit_bio' pk=bio.pk %}">Edit Bio</a>
+    </div>
+    </div>
+</div>
+    <div class="divider"></div>
+    <div class="section">
+<ul>
+{% for certificate in bio.certification_set.all  %}
+    <li>{{certificate.title}}</li>
+    <li>{{certificate.year}}</li>
+    <li>{{certificate.description}}</li>
+    <li>{{certification.link}}</li>
+    {%if certification.cert_image%}
+    <li><img src="{{certificate.cert_image.url}}" alt="not found"></li>
+    {% else %}
+    <p>Not found</p>
+    {% endif %}
+    <a href="{% url 'delete_certification' pk=certificate.pk %}">Delete certification</a>
+    <a href="{% url 'edit_certification' pk=certificate.pk %}">Edit certication</a>
+    </ul>
+{% endfor %}
+<a href="{%url 'certification' %}">Add certification</a>
+</div>
+
+<div class="divider"></div>
+    <div class="section">
+<h3>interest</h3>
+{% for interest in bio.interest_set.all %}
+<li>{{interest.name}}</li>
+{% endfor %}
+</div>
+
+    <div class="divider"></div>
+    <div class="section">
+<h5 class="left-align">Projects</h5>
+<ul>
+    {% for project in bio.project_set.all %}
+    <li>{{project.title}}</li>
+    <li>{{project.year}}</li>
+    <li>{{project.link}}</li>
+    <li>{{project.description}}</li>
+    <li>{{project.organisation}}</li>
+
+    <a href="{% url 'edit_project' pk=project.pk %}">Edit Project</a>
+    <a href="{%url 'delete_project' pk=project.pk %}">Delete project</a>
+    {% endfor %}
+</ul>
+<a href="{%url 'project' %}">Add Project</a>
+    </div>
+{% endblock %}
+</div>
+</div>
+</div>
+    </div>

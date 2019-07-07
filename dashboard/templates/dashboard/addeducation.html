@@ -1,0 +1,248 @@
+{% extends 'dashboard/base.html' %}
+{% block title %}taloscope | education{% endblock %}
+{% block content %}
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+  <!-- XDSoft DateTimePicker-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css" integrity="sha256-DOS9W6NR+NFe1fUhEE0PGKY/fubbUCnOfTje2JMDw3Y=" crossorigin="anonymous" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js" integrity="sha256-FEqEelWI3WouFOo2VWP/uJfs1y8KJ++FLh2Lbqc8SJk=" crossorigin="anonymous"></script>
+<!--<div class="container grey-darken-2 ">
+<div class="row" style="padding=10px;margin:10px;">
+      <div class="col center-align"><h4>Add Education</h4></div>
+          <form class="col s12 center-align" method="post" enctype="multipart/form-data" action="">
+              {% csrf_token %}
+                  <div class="col s12 center-algin"><h6><mark>Masters Education</mark></h6>
+                  </div>
+              <div class="row">
+                 <div class="input-field col s6">
+                     <i class="material-icons prefix">school</i>
+                 <input value="{{profile.masters_degree_name}}" name="masters_degree_name" type="text" class="validate" id="id_masters_degree_name">
+                  <label for="id_masters_degree_name">Masters Degree</label>
+                 </div>
+                  <div class="input-field col s6">
+                      <i class="material-icons prefix">domain</i>
+                      <input value="{{profile.masters_college_name}}" name="masters_college_name" type="text" class="validate" id="id_masters_college_name">
+                      <label for="id_masters_college_name">Masters College/University </label>
+                  </div>
+
+              </div>
+              <div class="row">
+                 <div class="input-field col s6">
+                     <i class="material-icons prefix">date_range</i>
+                 <input name="masters_education_from" type="text" class="validate" id="id_masters_education_from" value="{{profile.masters_education_from}}">
+                  <span class="helper-text" data-error="wrong" data-success="right">Masters Eduction Start Date</span>
+                 </div>
+                  <div class="input-field col s6">
+                      <i class="material-icons prefix">date_range</i>
+                      <input name="masters_education_till" type="text" class="validate" id="id_masters_education_till" value="{{profile.masters_education_till}}">
+                      <span class="helper-text" data-error="wrong" data-success="right">Masters Education End Date</span>
+                  </div>
+              </div>
+              <div class="row"></div>
+              <div class="bachelors degree">
+              <div class="row">
+              <div class="col s12 center-algin"><h6><mark>Bachelors Education</mark></h6>
+                  </div>
+              </div>
+                  <div class="row">
+                 <div class="input-field col s6">
+                     <i class="material-icons prefix">school</i>
+                 <input name="bachelors_degree" type="text" class="validate" id="id_bachelors_degree" value="{{profile.bachelors_degree}}">
+                  <label for="id_bachelors_degree">Bachelors Degree</label>
+                 </div>
+                  <div class="input-field col s6">
+                      <i class="material-icons prefix">domain</i>
+                      <input name="bachelors_college_name" type="text" class="validate" id="id_bachelors_college_name" value="{{profile.bachelors_college_name}}">
+                      <label for="id_bachelors_college_name">Bachelors College/University </label>
+                  </div>
+
+              </div>
+              <div class="row">
+                 <div class="input-field col s6">
+                     <i class="material-icons prefix">date_range</i>
+                 <input name="bachelors_education_from" type="text" class="validate" id="id_bachelors_education_from" value="{{profile.bachelors_education_from}}">
+                  <label for="id_bachelors_education_from">Bachelors Education Start From</label>
+                 </div>
+                  <div class="input-field col s6">
+                      <i class="material-icons prefix">date_range</i>
+                      <input name="bachelors_education_till" type="text" class="validate" id="id_bachelors_education_till" value="{{profile.bachelors_education_till}}">
+                      <label for="id_bachelors_education_till">Bachelors Education End Till</label>
+                  </div>
+
+              </div>
+                  </div>
+              <div class="high school degree">
+              <div class="row">
+              <div class="col s12 center-algin"><h6><mark>High School</mark></h6>
+                  </div>
+              </div>
+                  <div class="row">
+                 <div class="input-field col s6">
+                     <i class="material-icons prefix">school</i>
+                 <input name="High_School_degree" type="text" class="validate" id="id_High_School_degree" value="{{profile.high_school_degree}}">
+                  <label for="id_High_School_degree">High School</label>
+                 </div>
+                  <div class="input-field col s6">
+                      <i class="material-icons prefix">domain</i>
+                      <input name="High_School_name" type="text" class="validate" id="id_High_School_name" value="{{profile.high_school_name}}">
+                      <label for="id_High_School_name">High School Board/University </label>
+                  </div>
+
+              </div>
+              <div class="row">
+                 <div class="input-field col s6">
+                     <i class="material-icons prefix">date_range</i>
+                 <input name="High_School_from" type="text" class="validate" id="id_High_School_from" value="{{profile.High_School_from}}">
+                  <label for="id_High_School_from">High School Start Date</label>
+                 </div>
+                  <div class="input-field col s6">
+                      <i class="material-icons prefix">date_range</i>
+                      <input name="High_School_till" type="text" class="validate" id="id_High_School_till" value="{{profile.High_School_till}}">
+                      <label for="id_High_School_till">High School End Date</label>
+                  </div>
+
+              </div>
+                  </div>
+
+              <div class="col s12 center-align">
+              <button type="submit" class="waves-effect waves-light btn-small indigo indigo-darken-4">Add</button>
+              </div>
+          </form>
+      </div>
+</div>
+ <script>
+    $(function () {
+      $("#id_masters_education_from,#id_masters_education_till,#id_bachelors_education_from,#id_bachelors_education_till,#id_High_School_from,#id_High_School_till").datetimepicker({format: 'd/m/Y',});
+    });
+  </script>-->
+<div class="container grey-darken-2 ">
+<div class="row" style="padding=30px;margin:10px;">
+      <div class="row" >
+          <div class="col s12 center-align"><h4>Add Education</h4></div>
+      </div>
+    <div class="divider"></div>
+<form method="POST" class="row">
+    {% csrf_token %}
+    <div class="masters row z-depth-2" style="padding:20px;">
+        <div class="row">
+            <div class="col s12 left-align"><h6 class="teal-text text-darken-2" style="font-weight:50px;">Masters Education</h6>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s6 input-field">
+                <i class="material-icons prefix">school</i>
+<label for="id_masters_degree_name">Masters degree name:</label> <input type="text" name="masters_degree_name" value="{{profile.masters_degree_name}}" maxlength="150" id="id_masters_degree_name" />
+            </div>
+            <div class="col s6 input-field">
+                <i class="material-icons prefix">location_city</i>
+<label for="id_masters_college_name">Masters college name:</label> <input type="text" name="masters_college_name" value="{{profile.masters_college_name}}" maxlength="150" id="id_masters_college_name" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s6 input-field">
+                <i class="material-icons prefix">date_range</i>
+<label for="id_masters_education_from">Masters education from:</label> <input type="text" name="masters_education_from" value="{{profile.masters_education_from|date:'Y-m-d'}}" id="id_masters_education_from" /><input type="hidden" name="initial-masters_education_from" value="{{date}}" id="initial-id_masters_education_from" />
+            </div>
+            <div class="col s6 input-field">
+                <i class="material-icons prefix">date_range</i>
+<label for="id_masters_education_till">Masters education till:</label> <input type="text" name="masters_education_till" value="{{profile.masters_education_till|date:'Y-m-d'}}" id="id_masters_education_till" /><input type="hidden" name="initial-masters_education_till" value="2019-06-16" id="initial-id_masters_education_till" />
+                </div>
+        </div>
+        </div>
+    <!---bachelors--->
+    <div class="masters row z-depth-2" style="padding:20px;">
+         <div class="row">
+            <div class="col s12 left-align"><h6 class="teal-text text-darken-2" style="font-weight:50px;">Bachelors Education</h6>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s6 input-field">
+                <i class="material-icons prefix">school</i>
+<label for="id_bachelors_degree">Bachelors degree:</label> <input type="text" name="bachelors_degree" value="{{profile.bachelors_degree}}" maxlength="150" id="id_bachelors_degree" />
+            </div>
+                <div class="col s6 input-field">
+                    <i class="material-icons prefix">location_city</i>
+<label for="id_bachelors_college_name">Bachelors college name:</label> <input type="text" name="bachelors_college_name" value="{{profile.bachelors_college_name}}" maxlength="150" id="id_bachelors_college_name" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s6 input-field">
+                <i class="material-icons prefix">date_range</i>
+<label for="id_bachelors_education_from">Bachelors education from:</label> <input type="text" name="bachelors_education_from" value="{{profile.bachelors_education_from|date:'Y-m-d'}}" id="id_bachelors_education_from" /><input type="hidden" name="initial-bachelors_education_from" value="{{date}}" id="initial-id_bachelors_education_from" />
+            </div>
+            <div class="col s6 input-field">
+                <i class="material-icons prefix">date_range</i>
+<label for="id_bachelors_education_till">Bachelors education till:</label> <input type="text" name="bachelors_education_till" value="{{profile.bachelors_education_till|date:'Y-m-d'}}" id="id_bachelors_education_till" /><input type="hidden" name="initial-bachelors_education_till" value="{{date}}" id="initial-id_bachelors_education_till" />
+            </div>
+        </div>
+    </div>
+    <!---High School--->
+    <div class="masters row z-depth-2" style="padding:20px;">
+         <div class="row">
+            <div class="col s12 left-align"><h6 class="teal-text text-darken-2" style="font-weight:50px;">High School</h6>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s6 input-field">
+                <i class="material-icons prefix">school</i>
+<label for="id_High_School_degree">High School degree:</label> <input type="text" name="High_School_degree" maxlength="150" id="id_High_School_degree" value="{{profile.High_School_degree}}"/>
+            </div>
+        <div class="col s6 input-field">
+            <i class="material-icons prefix">location_city</i>
+<label for="id_High_School_name">High School name:</label> <input type="text" name="High_School_name" maxlength="150" id="id_High_School_name" value="{{profile.High_School_name}}"/>
+        </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s6">
+                <i class="material-icons prefix">date_range</i>
+<label for="id_High_School_from">High School from:</label> <input type="text" name="High_School_from" value="{{profile.High_School_from|date:"Y-m-d"}}" id="id_High_School_from" /><input type="hidden" name="initial-High_School_from" value="2019-06-16" id="initial-id_High_School_from" />
+                </div>
+            <div class="input-field col s6">
+                <i class="material-icons prefix">date_range</i>
+<label for="id_High_School_till">High School till:</label> <input type="text" name="High_School_till" value="{{profile.High_School_till|date:"Y-m-d"}}" id="id_High_School_till" /><input type="hidden" name="initial-High_School_till" value="2019-06-16" id="initial-id_High_School_till" />
+                </div>
+            </div>
+    </div>
+    <div class="masters row z-depth-2" style="padding:20px;">
+         <div class="row">
+            <div class="col s12 left-align"><h6 class="teal-text text-darken-2" style="font-weight:50px;">Junior School</h6>
+            </div>
+        </div>
+           <div class="row">
+            <div class="col s6 input-field">
+                <i class="material-icons prefix">school</i>
+<label for="id_Junior_degree">Junior Degree:</label> <input type="text" name="Junior_degree" maxlength="150" id="id_Junior_degree" value="{{profile.Junior_degree}}"/>
+            </div>
+
+            <div class="col s6 input-field">
+                <i class="material-icons prefix">location_city</i>
+<label for="id_Junior_School_name">Junior School Name:</label> <input type="text" name="Junior_School_name" maxlength="150" id="id_Junior_School_name" value="{{profile.Junior_School_name}}"/>
+            </div>
+           </div>
+        <div class="row">
+            <div class="col s6 input-field">
+                <i class="material-icons prefix">date_range</i>
+<label for="id_Junior_School_from">Junior School From:</label> <input type="text" name="Junior_School_from" value="{{profile.Junior_School_from|date:'Y-m-d'}}" id="id_Junior_School_from" /><input type="hidden" name="initial-Junior_School_from" value="2019-06-16" id="initial-id_Junior_School_from" />
+            </div>
+               <div class="col s6 input-field">
+                   <i class="material-icons prefix">date_range</i>
+<label for="id_Junior_School_till">Junior School End:</label> <input type="text" name="Junior_School_till" value="{{profile.Junior_School_till|date:'Y-m-d'}}" id="id_Junior_School_till" /><input type="hidden" name="initial-Junior_School_till" value="2019-06-16" id="initial-id_Junior_School_till" />
+           </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12 center-align ">
+            <button style="width:100%;" type="submit" class="waves-effect waves-light btn "><i class="material-icons center">file_upload</i>submit</button>
+        </div>
+    </div>
+    </form>
+</div>
+</div>
+
+
+<script>
+    $(function () {
+      $("#id_masters_education_from,#id_masters_education_till,#id_bachelors_education_from,#id_bachelors_education_till,#id_High_School_from,#id_High_School_till,#id_Junior_School_from,#id_Junior_School_till").datetimepicker({format: 'Y-m-d',});
+    });
+  </script>
+{% endblock %}

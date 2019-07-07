@@ -1,0 +1,351 @@
+{% extends 'dashboard/base.html' %}
+{% block title %}taloscope|resume|{{user.username}} {% endblock %}
+{% load staticfiles %}
+{% block content %}
+<!----------------------------------------NAVIGATION ENDS----------------------------------->
+    <div class="row full-page" style="">
+        <nav class="nav-center sticky teal darken-2" style="position:;">
+            <div class="nav-wrapper center-align " style="">
+                <ul class=" hide-on-med-down" style="margin-left:150px;">
+                 <li class="center">
+                     <a class="" id="home" href="{% url 'home' username=user.username %}"><i class="material-icons left ">cast</i><span>posts</span></a>
+                 </li>
+                <li>
+                    <a href="{% url 'resume' username=profile.user.username %}" class="left-align"><i class="material-icons left ">school</i><span>resume</span></a>
+                </li>
+                <li class="share">
+            <a onclick="copyToClipboard('#p1')" class="share-button" style=""><i class="material-icons left">share</i>share </a>
+                </li>
+                </ul>
+
+             </div>
+
+            </nav>
+        <div class="container">
+        <div class="col  center-align s3 z-depth-1 white" style="margin-top:10px;margin-left:20px;">
+                <div class="info">
+                    <span class="waves-effect right" style="margin-top:5px;"><i class="material-icons tiny">settings</i><a href=""></a></span>
+                    <div class="row">
+                        <div class="col s12" style="margin-top:-15px;">
+                            {% if user.profile.profile_image %}
+                   <img src="{{user.profile.profile_image.url}}" alt="" class="circle responsive-img" style="height:120px;width:120px">
+                            {% else %}
+                            <img src="images/marcus.webp" alt="" class=" circle responsive-img" style="height:120px;width:120px;">
+                            {% endif %}
+                            <!-- notice the "circle" class -->
+                        </div>
+                        <div class="col s12">
+                            <div class="" style="margin-top:-20px;">
+                    <p class="name" style="">{{user.first_name}}</p>
+                    <p class="grey-text text-darken-2 who_are" style="">{{user.profile.description}}</p>
+                                {% if viewer not in profile.followed_by.all %}
+                                <p style=""><a href="{% url 'follow' username=user.username %}" class="btn-flat waves-effect waves-yellow grey lighten-1"><i class="large left material-icons ">star_border</i>&nbsp;{{user.profile.followed_by.count}}</a></p>
+                                {% else %}
+                                <p style="margin-top:-10px !important;"><a href="{% url 'unfollow' username=user.username%}" class="btn-flat waves-effect waves-yellow grey lighten-1"><i class="large left material-icons yellow-text text-accent-2">star</i>&nbsp;{{user.profile.followed_by.count}}</a></p>
+                                {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    <div class="divider"></div>
+                    <!-----------About Me---------->
+                    <div class="about section left-align row" style="padding:10px;">
+                        <div class="col s12" style="">
+                        <span class="name" style="font-size:16px;font-weight:bold;"><!----<i class="material- left small">account_circle</i>------------------->
+                            About Me</span>
+                        </div>
+                        {% if not user.profile.about_me %}
+                        <div class="col about_col center">
+                             <div class="">
+                                </div>
+                        </div>
+                        {% else %}
+                            <div class="col s12 left-align grey-text text-darken-3 info-box">
+                                    <p class="">{{user.profile.about_me}}</p>
+                            </div>
+                        {% endif %}
+
+                    </div>
+                    <div class="divider"></div>
+                    <!--------SKILLS--------------->
+                    <div class="skills section left-align row" style="padding:10px;">
+                        <div class="col s12" style="">
+                        <span class="name" style="font-size:16px;font-weight:bold;"><!--<i class="material-icons small left">check_circle</i>-->Skills</span>
+                        </div>
+                        {% if not user.profile.skills_set.all %}
+                        <div class="row">
+                            <div class="col skill_col_empty">
+                            </div>
+                        </div>
+                            {% else %}
+                            <div class="col s12  skill_col grey-text text-darken-3 info-box">
+                            {% for skill in user.profile.skills_set.all %}
+
+
+                            {% endfor %}
+                            </div>
+                            {% endif %}
+                    </div>
+                    <div class="divider"></div>
+                    <!--------CONTACT-------------->
+                    <div class="contact section left-align row" style="padding:10px;">
+                       <div class="col s12">
+                        <span class="name" style="font-size:16px;font-weight:bold;">Contacts</span>
+                        </div>
+
+                        {% if  not user.profile.profilecontact_set.all %}
+                        <div class="row">
+                            <div class="col">
+
+                            </div>
+                        </div>
+                        {% else %}
+                        {% for pro in user.profile.profilecontact_set.all %}
+
+                                <div class="col s6 contact-box">
+                                    <span class=""><i class="material-icons left tiny teal-text">phone</i>Phone</span>
+                                    </div>
+                                <div class="col s6 contact-box">
+<span>{% if pro.phone %}{{pro.phone}}{% else %}&nbsp;{% endif %}</span>
+                                    </div>
+                                <div class="col s6 contact-box">
+                                    <span class=""><i class="material-icons left tiny teal-text">domain</i>City</span>
+                                    </div>
+                                <div class="col s6 contact-box ">
+<span class="">{{pro.city}}</span>
+                                    </div>
+
+                        {% endfor %}
+
+                        {% endif %}
+
+                        <!--<div class="row">
+                                <div class="col s6 left-align skill_col">
+                                    <span class="skill_info">City</span>
+                                    </div>
+                                <div class="col s6 center-align skill_col">
+<span class="skill_info">Gurgaon,India</span>
+                                    </div>
+                                </div>-->
+                    </div>
+
+                </div>
+            </div>
+
+
+    <!----------------------Main Page-------------------------------------------->
+        <div class=""><span></span></div>
+        <div class="col s8 " style="margin-left:20px;margin-top:10px;">
+
+    <!-------------------------------Resume Section-------------------------------->
+            <div class="row z-depth-1 white" style="padding:0px 20px 15px 20px;" >
+                <div class="education row">
+                        <div class="resume-head-section row">
+                            <div class="col s9 ">
+                        <blockquote><h5>EDUCATION</h5></blockquote>
+                                </div>
+                            <div class="col s3 add valign-wrapper">
+                                </div>
+                        </div>
+                        {% if masters %}
+                        <div class="row edu_box">
+                        <div class="col s6" style="">
+                            <p class="resume-subhead" >{{masters}}</p>
+                            <p class="resume-subhead-info">{{profile.masters_college_name}}</p>
+                        </div>
+                        <div class="col s3 left" style="">
+                            <p class="date" style="">{{profile.masters_education_from|date:"N Y"}} - {{profile.masters_education_till|date:"N Y"}}</p>
+                        </div>
+                      </div>
+                            {% endif %}
+                            {% if bachelors %}
+                    <div class="row edu_box">
+                         <div class="col s6" style="">
+                            <p class="resume-subhead" >{{bachelors}}</p>
+                            <p class="resume-subhead-info">{{profile.bachelors_college_name}}</p>
+                        </div>
+                        <div class="col s3 left" style="">
+                            <p class="date" style="">{{profile.bachelors_education_from|date:"N Y"}} - {{profile.bachelors_education_till|date:"N Y"}}</p>
+                        </div>
+                    </div>
+
+                            {% endif %}
+                            {% if high_school %}
+                            <div class="row edu_box">
+                             <div class="col s6">
+                            <p class="resume-subhead" >{{high_school}}</p>
+                            <p class="resume-subhead-info">{{profile.High_School_name}}</p>
+                             </div>
+                        <div class="col s3 left" style="">
+                            <p class="date" style="">{{profile.High_School_from|date:"N Y"}} - {{profile.High_School_till|date:"N Y"}}</p>
+                        </div>
+                         </div>
+                            {% endif %}
+                    {% if junior_school %}
+                            <div class="row edu_box">
+                                <div class="col s6" style="">
+                            <p class="resume-subhead" >{{junior_school}}</p>
+                            <p class="resume-subhead-info">{{profile.Junior_School_name}}</p>
+                                </div>
+                                <div class="col s3 left" style="">
+                            <p class="date" style="">{{profile.Junior_School_from|date:"N Y"}} - {{profile.Junior_School_till|date:"N Y"}}</p>
+                                </div>
+                            </div>
+                            {% endif %}
+                    </div>
+                <div class="divider"></div>
+
+<!------------------------------------------------Work Experience------------------->
+                {% if profile.workexperience_set.all %}
+                    <div class="Experience row">
+                    <div class="resume-head-section row">
+                            <div class="col s9 ">
+                        <blockquote><h5>WORK EXPERIENCE</h5></blockquote>
+                                </div>
+                            <div class="col s3 add valign-wrapper">
+                                </div>
+                        </div>
+
+                            {% for each in profile.workexperience_set.all %}
+                        <div class="row edu_box">
+                        <div class="col s6">
+                             <p class="resume-subhead">{{each.organisation}}
+                                {% if each.designation %}
+                                as {{each.designation}}
+                                {% else %}
+                                {% endif %}
+                                &nbsp</p>
+                        </div>
+                        <div class="col s5 left" style="">
+                           <p class="date" style="">{{each.worked_from|date:"N Y"}} - {{each.worked_till|date:"N Y"}}&nbsp;<span></span></p>
+                        </div>
+                            <div class="col s9">
+                             <p class="resume-subhead-info-big">{{each.describe}}</p>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+<div class="divider"></div>
+<!--------------------------------------PROJECT---------------------------------->
+                {% if profile.project_set.all %}
+                    <div class="projects row" style="">
+                        <div class="resume-head-section row">
+                            <div class="col s9 ">
+                        <blockquote><h5>PROJECTS</h5></blockquote>
+                                </div>
+                            <div class="col s3 add valign-wrapper">
+                                </div>
+                        </div>
+                        {% for each in profile.project_set.all %}
+                        <div class="row edu_box">
+                        <div class="col s6">
+                            <p class="resume-subhead">{{each.title}}&nbsp;&nbsp</p>
+                        </div>
+                        <div class="col s5 left" style="">
+                            <p class="date" style="">{{each.year|date:"N Y"}}&nbsp;&nbsp;&nbsp;<span></span></p>
+                        </div>
+                            <div class="col s9">
+                        <p class="resume-subhead-info-big">{{each.description}}</p>
+                            </div>
+                        </div>
+                        <div class="col s3 outer-column" style="">
+                                {% if each.link %}
+                                <a class="btn waves-effect red lighten-2" href="{{each.link}}"><i class="material-icons right">arrow_forward</i>See project</a>
+                                {% endif %}
+                        </div>
+                        {% endfor %}
+                      </div>
+                {% endif %}
+
+                <div class="divider"></div>
+                <!-------------------CERTIFICATION------------------->
+                {% if profile.certification_set.all %}
+                    <div class="certification row" style="margin-top:;">
+                        <div class="resume-head-section row">
+                            <div class="col s9 ">
+                                <blockquote><h5>CERTIFICATIONS &nbsp;and&nbsp; ACHIEVEMENTS</h5></blockquote>
+                            </div>
+                            <div class="col s3 add valign-wrapper">
+                            </div>
+                        </div>
+                        {% for each in profile.certification_set.all %}
+                        <div class="row edu_box">
+                        <div class="col s6">
+                            <p class="resume-subhead">{{each.title}}&nbsp;&nbsp</p>
+                        </div>
+                        <div class="col s5  left" style="">
+                            <p class="date" style="">{{each.year|date:"N Y"}}&nbsp;&nbsp;<span></span></p>
+                        </div>
+                            <div class="col s9 outer-column">
+                            {% if each.cert_image %}
+                        <img src="{{each.cert_image.url}}" style="width:100px;height:100px;">
+                            {% endif %}
+                        </div>
+                        </div>
+                        {% endfor %}
+                      </div>
+                {% endif %}
+                <!----interest------------------->
+                 {% if profile.interest_set.all %}
+                    <!--<div class="interest" style="margin-top:;">
+                        <div class="resume-head-section row">
+                            <div class="col s12 grey">
+                                <span style="font-size:x-large" class="edu-head white-text">INTEREST</span>
+                                <a style="margin-top:5px;" href="{% url 'interest' %}" class="right"><i class="material-icons white-text">add</i></a>
+                            </div>
+                        </div>
+
+                        <div class="row edu-box">
+                        <div class="col offset-s3 edit_box" style="margin-top:-10px;">
+                            {% for each in profile.interest_set.all %}
+                            <span style="font-weight:bold;">{{each.interest}}&nbsp;&nbsp<span>
+                                    <a href="{% url 'edit_interest' pk=each.pk %}"><i class="material-icons grey-text text-darken-1">edit</i></a></span><span>&nbsp<a href="{% url 'delete_interest' pk=each.pk %}"><i class="material-icons grey-text text-darken-1">delete</i></a></span></span>
+                            {% endfor %}
+                        </div>
+                        </div>
+
+                      </div>-->
+                {% endif %}
+
+
+<!-------------------------------------ADDING BUTTON--------------------------------->
+                    <div class="adding-section" style="padding:20px;">
+                        {% if not profile.workexperience_set.all and not profile.project_set.all and not profile.certification_set.all and not profile.certification_set.all and not profile.interest_set.all%}
+                            <h6>No Resume Found</h6>
+                        {% endif %}
+                </div>
+         </div>
+    </div>
+        </div>
+    </div>
+<span hidden id="p1">{{ request.build_absolute_uri }}{{ object.get_absolute_url }}</span>
+<script>
+$(document).ready(function(){
+   $('.modal').modal();
+   $('.dropdown-trigger').dropdown();
+});
+
+function copyToClipboard(element) {
+  var $temp = $("<input>");
+  $("body").append($temp);
+  $temp.val($(element).text()).select();
+  document.execCommand("copy");
+  $temp.remove();
+}
+
+$(document).ready(function() {
+  // Bind click event on all the buttons inside .card
+  $(".share a").click(function() {
+
+    // Check if the clicked button has class `btn_s`
+    if ($(this).hasClass('share-button')) {
+      $(this).html('<i class="material-icons left">done</i>Link Copied').toggleClass('share-button copied-button');
+    } else {
+      $(this).html('<i class="material-icons left">share</i>share').toggleClass('copied-button share-button');
+    }
+  });
+});
+$("#resume").focus();
+</script>
+
+{% endblock %}

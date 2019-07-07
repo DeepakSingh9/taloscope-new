@@ -1,0 +1,30 @@
+{% extends 'dashboard/base.html' %}
+{% block title %}taloscope | add contact{% endblock %}
+{% block content %}
+<div class="container grey-darken-2 ">
+<div class="row" style="padding=10px;margin:10px;">
+      <div class="col center-align"><h4>Add Contact</h4></div>
+          <form class="col s12 center-align" method="post" enctype="multipart/form-data">
+              {% csrf_token %}
+              <div class="input-field col s6">
+                  <i class="material-icons prefix indigo-text text-darken-4">local_phone</i>
+                 <input name="phone" type="text" class="validate" id="id_phone" value="{{contact.phone}}">
+                  <label for="id_phone">Phone</label>
+                  <span class="helper-text" data-error="wrong" data-success="right">You can leave this field blank if you dont want to share your phone number</span>
+              </div>
+              <div class="row">
+              <div class="input-field col s6">
+                  <i class="material-icons prefix indigo-text text-darken-4">location_city</i>
+                 <input name="city" type="text" class="validate" id="id_city" value="{{contact.city}}">
+                  <label for="id_city" >City</label>
+              </div>
+                  </div>
+              <div class="row">
+        <div class="col s12 center-align ">
+            <button style="width:100%;" type="submit" class="waves-effect waves-light btn">submit</button>
+        </div>
+    </div>
+          </form>
+      </div>
+</div>
+{% endblock %}

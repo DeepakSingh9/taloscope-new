@@ -1,0 +1,340 @@
+
+{% extends 'dashboard/base.html' %}
+{% load staticfiles %}
+{% block content %}
+<!----------------------------------------NAVIGATION ENDS----------------------------------->
+    <div class="row" style="margin-left:20px;">
+        <div class="col sticky center-align s3  z-depth-2" style="margin-left:0;margin-top:10px;">
+                <div class="info">
+                    <div class="row">
+                        <div class="col s6 profile-image">
+                            {% if profile.profile_image %}
+                   <img src="{{profile.profile_image.url}}" alt="" class="circle responsive-img" style="margin-top:20px;height:100px;width:100px;">
+
+                            {% else %}
+                            <img src="images/marcus.webp" alt="" class="circle responsive-img" style="margin-top:20px;height:100px;width:100px;">
+
+                            {% endif %}
+                            <!-- notice the "circle" class -->
+                        </div>
+                        <div class="col s6">
+
+                            <div class="left-align" style="margin-top:30px;">
+                    <p class="name" style="font-weight:bold;">{{profile.user.get_full_name}}</p>
+                    <p class="who_are grey-text text-darken-2" style="margin-top:-15px;font-size:14px;font-weight:bold;">{{profile.description}}</p>
+                                <button class="btn my_button" type="submit" name="action">Follow</button>
+                                </div>
+                            </div>
+                        </div>
+                    <div class="divider"></div>
+                    <!-----------About Me---------->
+                    <div class="about section left-align">
+                        <div class="" style="padding-bottom:10px;">
+                        <span class="name" style="margin-left:8px;margin-top:-5px;font-weight:bold;">About Me</span>
+                        </div>
+                            <div class="row">
+                                {% if not user.profile.about_me %}
+                                <div class="col about_col left-align">
+                                </div>
+                                {% else %}
+                                <div class="col about_col left-align">
+                                    <p class="about_info">{{user.profile.about_me}}</p>
+                                </div>
+                                {% endif %}
+                            </div>
+
+                    </div>
+                    <div class="divider"></div>
+                    <!--------SKILLS--------------->
+                    <div class="skills section left-align">
+                        <div class="row">
+                            <div class="col s12">
+                        <span class="name" style="margin-top:-5px;margin-left:8px;font-weight:bold;">Skills</span>
+                            </div>
+                        </div>
+                        {% if not user.profile.skills_set.all %}
+                        <div class="row">
+                            <div class="col skill_col_empty">
+                            </div>
+                        </div>
+                            {% else %}
+                            {% for skill in user.profile.skills_set.all %}
+                        <div class="row">
+                            <div class="col s12 left-align skill_col">
+                                    <span class="skill_info">{{skill.name}}</span>
+
+                            </div>
+                        </div>
+                            {% endfor %}
+                            {% endif %}
+                    </div>
+                    <div class="divider"></div>
+                    <!--------CONTACT-------------->
+                    <div class="contact section left-align">
+                       <div class="" style="padding-bottom:10px;">
+                        <span class="name" style="margin-top:-5px;margin-left:8px;font-weight:bold;">Contacts</span>
+
+                        </div>
+                        <div class="row">
+                                <div class="col s6 left-align skill_col">
+                                    <span class="skill_info">Email</span>
+                                    </div>
+                                <div class="col s6 center-align skill_col">
+<span class="skill_info">{{user.email}}</span>
+                                    </div>
+                                </div>
+                        {% if  not user.profile.profilecontact_set.all %}
+                        <div class="row">
+                            <div class="col skill_col">
+
+                            </div>
+                        </div>
+                        {% else %}
+                        {% for pro in user.profile.profilecontact_set.all %}
+                            <div class="row">
+                                <div class="col s6 left-align skill_col">
+                                    <span class="skill_info">Phone</span>
+                                    </div>
+                                <div class="col s6 center-align skill_col">
+<span class="skill_info">{{pro.phone}}</span>
+                                    </div>
+                                </div>
+                        <div class="row">
+                                <div class="col s6 left-align skill_col">
+                                    <span class="skill_info">City</span>
+                                    </div>
+                                <div class="col s6 center-align skill_col">
+<span class="skill_info">{{pro.city}}</span>
+                                    </div>
+                                </div>
+                        {% endfor %}
+                        {% endif %}
+                        <!--<div class="row">
+                                <div class="col s6 left-align skill_col">
+                                    <span class="skill_info">City</span>
+                                    </div>
+                                <div class="col s6 center-align skill_col">
+<span class="skill_info">Gurgaon,India</span>
+                                    </div>
+                                </div>-->
+                    </div>
+
+                </div>
+            </div>
+
+
+    <!----------------------Main Page-------------------------------------------->
+        <div class=""><span></span></div>
+        <div class="col s8" style="margin-left:20px;margin-top:-15px;">
+        <!----------------------------2nd Nav---------------------------------->
+            <div class="row">
+             <ul class="home_nav">
+                 <li class="">
+                     <a class="left-align" href="{% url 'home' username=profile.user.username %}"><i class="material-icons left ">home</i><span>home</span></a></li>
+                <li class=""><a href="{% url 'resume' username=profile.user.username %}" class="left-align"><i class="material-icons left ">school</i><span>resume</span></a></li>
+                <li class="share">
+            <a onclick="copyToClipboard('#p1')" class="share-button" style=""><i class="material-icons left">share</i>share </a></li>
+
+             </ul>
+            </div>
+
+    <!-------------------------------Video Section-------------------------------->
+            <div class="row z-depth-2" style="margin-left:10px;margin-top:15px;padding:15px;" >
+                <!-------------------------------EDUCATION-------------------------------------------------------------------->
+                <div class="education">
+                        <div class="resume-head-section row">
+                            <div class="col s12 grey">
+                        <span style="font-size:x-large;" class="edu-head white-text">EDUCATION</span>
+                                </div>
+
+                        </div>
+
+                            {% if masters %}
+                        <div class="row edu_box">
+                        <div class="col s3 right-align" style="margin-top:-10px;">
+                            <p class="date" style="font-weight:bold;">{{profile.masters_education_from|date:"b Y"}} - {{profile.masters_education_till|date:"b Y"}}</p>
+                        </div>
+                        <div class="col s6 left-align" style="margin-top:-10px;">
+                            <p style="font-weight:bold;">{{masters}}</p>
+                        <p class="about_info">{{profile.masters_college_name}}</p>
+                                </div>
+                      </div>
+                            {% endif %}
+                            {% if bachelors %}
+                    <div class="row edu_box">
+                        <div class="col s3 right-align" style="margin-top:-10px;">
+                            <p class="date" style="font-weight:bold;">{{profile.bachelors_education_from|date:"b Y"}} - {{profile.bachelors_education_till|date:"b Y"}}</p>
+                        </div>
+                        <div class="col s6 left-align" style="margin-top:-10px;">
+                            <p style="font-weight:bold;">{{bachelors}}</p>
+                        <p class="about_info">{{profile.bachelors_college_name}}</p>
+                                </div>
+                    </div>
+
+                            {% endif %}
+                            {% if high_school %}
+                            <div class="row edu_box">
+                            <div class="col s3 right-align" style="margin-top:-10px;">
+                            <p class="date" style="font-weight:bold;">{{profile.High_School_from|date:"b Y"}} - {{profile.High_School_till|date:"b Y"}}</p>
+                               </div>
+                                <div class="col s6 left-align" style="margin-top:-10px;">
+                            <p style="font-weight:bold;">{{high_school}}</p>
+                        <p class="about_info">{{profile.High_School_name}}</p>
+                                </div>
+                         </div>
+                            {% endif %}
+                    </div>
+
+<!------------------------------------------------Work Experience------------------->
+                {% if profile.workexperience_set.all %}
+                    <div class="Experience" style="margin-top:;">
+                    <div class="row resume-head-section">
+                        <div class="col s12 grey">
+                    <span style="font-size:x-large;" class="white-text">WORK EXPERIENCE</span>
+                        </div>
+                    </div>
+
+                            {% for each in profile.workexperience_set.all %}
+                        <div class="row edu-box">
+                        <div class="col s3 right-align" style="margin-top:-10px;">
+                            <p class="date" style="font-weight:bold;">{{each.worked_from|date:"b Y"}} - {{each.worked_till|date:"b Y"}}</p>
+                        </div>
+                        <div class="col s9 left-align edit_box" style="margin-top:-10px;">
+                            <p style="font-weight:bold;">{{each.organisation}}
+                                {% if each.designation %}
+                                as {{each.designation}}
+                                {% else %}
+                                {% endif %}
+                                &nbsp
+                            </p>
+                        <p class="work_info">{{each.describe}}</p>
+                        </div>
+                            </div>
+                        {% endfor %}
+
+                    </div>
+                {% endif %}
+
+<!--------------------------------------PROJECT---------------------------------->
+                {% if profile.project_set.all %}
+                    <div class="projects" style="">
+                        <div class="resume-head-section row">
+                            <div class="col s12 grey">
+                                <span style="font-size:x-large;" class="edu-head white-text">PROJECTS</span>
+                            </div>
+                        </div>
+                        {% for each in profile.project_set.all %}
+                        <div class="row edu-box">
+                        <div class="col s3 right-align" style="margin-top:-10px;">
+                            <p class="date" style="font-weight:bold;">{{each.year}}</p>
+                        </div>
+                        <div class="col s9  edit_box" style="margin-top:-10px;">
+                            <p style="font-weight:bold;">{{each.title}}&nbsp;&nbsp</p>
+                        <p class="work_info">{{each.description}}</p>
+                            </div>
+                            <div class="col s9 offset-s3" style="">
+                                {% if each.link %}
+                                <a href="{{each.link}}">see project</a>
+                                {% endif %}
+                            </div>
+
+
+                        </div>
+                        {% endfor %}
+                      </div>
+                {% endif %}
+                <!-------------------CERTIFICATION------------------->
+                {% if profile.certification_set.all %}
+                    <div class="certification" style="margin-top:;">
+                        <div class="resume-head-section row">
+                            <div class="col s12 grey">
+                                <span style="font-size:x-large;" class="edu-head white-text">CERTIFICATIONS</span>
+                            </div>
+                        </div>
+                        {% for each in profile.certification_set.all %}
+                        <div class="row edu-box">
+                        <div class="col s3 right-align" style="margin-top:-10px;">
+                            <p class="date" style="font-weight:bold;">{{each.year}}</p>
+                        </div>
+                        <div class="col s9  edit_box" style="margin-top:-10px;">
+                            <p style="font-weight:bold;">{{each.title}}&nbsp;&nbsp<span>
+                                    <a href=""><i class="material-icons indigo-text text-darken-4"></i></a></span><span>&nbsp<a href=""><i class="material-icons grey-text text-darken-1"></i></a></span></p>
+                        </div>
+                            <div class="col s9 offset-s3">
+                            {% if each.cert_image %}
+                        <a href="{{each.link}}" class="work_info"><img src="{{each.cert_image.url}}" style="width:100px;height:100px;"></a>
+                            {% endif %}
+                        </div>
+                        </div>
+                        {% endfor %}
+                      </div>
+                {% endif %}
+                <!----interest------------------->
+                 {% if profile.interest_set.all %}
+                    <div class="interest" style="margin-top:;">
+                        <div class="resume-head-section row">
+                            <div class="col s12 grey">
+                                <span style="font-size:x-large" class="edu-head white-text">INTEREST</span>
+                                <a style="margin-top:5px;" href="" class="right"><i class="material-icons white-text"></i></a>
+                            </div>
+                        </div>
+
+                        <div class="row edu-box">
+                        <div class="col offset-s3 edit_box" style="margin-top:-10px;">
+                            {% for each in profile.interest_set.all %}
+                            <span style="font-weight:bold;">{{each.interest}}&nbsp;&nbsp<span>
+                                    <a href=""><i class="material-icons grey-text text-darken-1"></i></a></span><span>&nbsp<a href=""><i class="material-icons grey-text text-darken-1"></i></a></span></span>
+                            {% endfor %}
+                        </div>
+                        </div>
+
+                        <!--<div class="col s3 right-align" style="margin-top:-10px;">
+                            <p class="date" style="font-weight:bold;">2016-Jan to 2017-Apr</p>
+                        </div>
+                        <div class="col s9 left-align" style="margin-top:-10px;">
+                            <p style="font-weight:bold;">CCAR</p>
+                        <p class="work_info">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat....</p>
+                        </div>-->
+                      </div>
+                {% endif %}
+
+<!-------------------------------------ADDING BUTTON--------------------------------->
+                    <div class="adding-section" style="padding:20px;">
+                        <div class="row center">
+                        {% if not profile.workexperience_set.all and not profile.project_set.all and not profile.certification_set.all and not profile.certification_set.all and not profile.interest_set.all%}
+                            <h6>No Resume Found</h6>
+                        {% endif %}
+                        </div>
+                </div>
+         </div>
+    </div>
+<span hidden id="p1">{{request.get_full_path}}</span>
+<script>
+$(document).ready(function(){
+   $('.modal').modal();
+   $('.dropdown-trigger').dropdown();
+});
+
+function copyToClipboard(element) {
+  var $temp = $("<input>");
+  $("body").append($temp);
+  $temp.val($(element).text()).select();
+  document.execCommand("copy");
+  $temp.remove();
+}
+
+$(document).ready(function() {
+  // Bind click event on all the buttons inside .card
+  $(".share a").click(function() {
+
+    // Check if the clicked button has class `btn_s`
+    if ($(this).hasClass('share-button')) {
+      $(this).html('<i class="material-icons left">done</i>Link Copied').toggleClass('share-button copied-button');
+    } else {
+      $(this).html('<i class="material-icons left">share</i>share').toggleClass('copied-button share-button');
+    }
+  });
+});
+</script>
+    </div>
+{% endblock %}

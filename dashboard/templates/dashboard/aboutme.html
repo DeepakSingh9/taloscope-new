@@ -1,0 +1,28 @@
+{% extends 'dashboard/base.html' %}
+{% block title %}taloscope | add about me{% endblock %}
+{% block content %}
+<div class="container">
+<div class="row">
+      <div class="col center-align"><h4>Add a Summary About You</h4></div>
+          <form class="col s12" method="post" enctype="multipart/form-data">
+              {% csrf_token %}
+              <div class="input-field col s11">
+                  <i class="material-icons prefix indigo-text text-darken-4">mode_edit</i>
+                  <textarea name="about_me" rows="10" cols="50" id="id_about_me" class=" newtextarea validate" data-length="150">{{profile.about_me}}</textarea>
+                  {{ form.about_me.label_tag }}
+                  {{ form.about_me.errors }}
+              </div>
+              <div class="row">
+        <div class="col s12 center-align ">
+            <button style="width:100%;" type="submit" class="waves-effect waves-light btn ">submit</button>
+        </div>
+    </div>
+          </form>
+      </div>
+</div>
+<script>
+$(document).ready(function() {
+    $('textarea#id_about_me').characterCounter();
+  });
+       </script>
+{% endblock %}

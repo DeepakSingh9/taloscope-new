@@ -1,0 +1,112 @@
+{% extends 'dashboard/base.html' %}
+{% load staticfiles %}
+{% block content %}
+<!-- Navbar -->
+<div class="row">
+
+<!-- Page Container -->
+<div class="col s3 z-depth center-align grey lighten-3" style="margin-top:10px;margin-left:40px;">
+        <!--<div class="w3-container">-->
+            {% if user.is_authenticated %}
+             {% if user.profile.profile_image %}
+         <p class="center-align"><img src="{{user.profile.profile_image.url}}" class="circle" style="width:150px;height:150px;" alt="Avatar"></p>
+    <h6 class="name"><span class="center-align">{{user.get_full_name}}</span></h6>
+            <p class="name">{{user.profile.description}}</p>
+             {% else %}
+            <a href="{% url 'image_upload' pk=user.pk %}">upload image</a>
+            <h5>{{user.first_name}}{{user.last_name}}</h5>
+
+            {% endif %}
+            {% endif %}
+
+            {% if user.is_authenticated %}
+            {% endif %}
+     <div class="divider"></div>
+<!--ABOUT ME---->
+       <div class="section">
+         {% if not user.profile.about_me %}
+         <blockquote><a href="{% url 'aboutme' pk=user.pk %}">Add About You</a></blockquote>
+         {% else %}
+           <p class="center-align"><i class="tiny material-icons center-align">account_box</i>ABOUT ME</p>
+           <p class="">{{user.profile.about_me}} <a href="{% url 'edit_aboutme' pk=user.pk %}"><i class="material-icons">create</i></a></p>
+         {% endif %}
+      </div>
+<!--CONTACT--->
+
+        <span onclick="this.parentElement.style.display='none'" class="w3-button w3-theme-l3 w3-display-topright">
+          <i class="fa fa-remove"></i>
+        </span>
+           <p class="center-align"><i class="tiny material-icons ">edit_location</i>CONTACT ME</p>
+           <p><i class="tiny material-icons">email</i>{{user.email}}</p>
+         {% if  user.profile.profilecontact_set.all %}
+           {% for pro in user.profile.profilecontact_set.all %}
+           <p><i class="tiny material-icons">phone</i>{{pro.phone}}<a href="{% url 'edit_contact' pk=user.pk %}"><i class="material-icons">edit</i></a></p>
+
+           {% endfor %}
+         <p><strong><a href="{% url 'addcontact'  %}">Add Contact</a></strong></p>
+
+         {% else %}
+
+          <p><strong><a href="{% url 'addcontact'  %}">Add Contact</a></strong></p>
+
+         {% endif %}
+
+
+<!---------------------Skills------------------------------------------------------------------------>
+        <div class="section">
+        <div class="w3-container w3-display-container w3-round w3-theme-l4 w3-border w3-theme-border w3-margin-bottom w3-hide-small">
+        <span onclick="this.parentElement.style.display='none'" class="w3-button w3-theme-l3 w3-display-topright">
+          <i class="fa fa-remove"></i>
+        </span>
+
+         {% if not user.profile.skills_set.all %}
+         <p><strong><a href="{% url 'addskills'  %}">Add skills</a></strong></p>
+         {% else %}
+            <p class="center-align"><i class="tiny material-icons center-align">stars</i>SKILLS</p>
+        {% for skill in user.profile.skills_set.all %}
+            <p>{{skill.name}}<a href="{% url 'delete_skills' pk=skill.id %}"><i class="material-icons">delete this</i></a><a href="{% url 'edit_skills' pk=skill.id %}"><i class="material-icons float-left">edit this</i></a></p>
+            {% endfor %}
+         <p><strong><a href="{% url 'addskills'  %}">Add skills</a></strong></p>
+
+         {% endif %}
+      </div>
+        </div>
+<!--------------------------------contact----------------------------------------------------------->
+
+    <!-- End Left Column -->
+
+
+
+
+  </div>
+    <!-- Middle Column -->
+<div class="col s7 " style="margin-left:50px;">
+      {% if  user.profile.post_set.all%}
+           {% for all in user.profile.post_set.all %}
+         <div class="section ">
+          <video class="responsive-video z-depth-1" controls>
+            <source src="{{all.video.url}}" type="video/mp4">
+            </video>
+         </div>
+    <h2>{{all.title}}</h2>
+           {% endfor %}
+        {% else %}
+      <div class="w3-row-padding">
+        <div class="w3-col m12">
+          <div class="w3-card w3-round w3-white">
+            <div class="w3-container w3-padding">
+              <h6 class="w3-opacity">Social Media template by w3.css</h6>
+              <p contenteditable="true" class="w3-border w3-padding">Be so good they can't ignore you.</p>
+              <a href="{% url 'uploadskills' %}">upload your first video {{user.username}} and let the world take a note of you</a>
+            </div>
+          </div>
+        </div>
+      </div>
+{% endif %}
+       </div>
+
+    <!-- End Right Column -->
+
+
+</div>
+{% endblock %}
