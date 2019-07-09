@@ -133,7 +133,7 @@ STATICFILES_DIRS = (
 
 
 
-MEDIA_URL = '/media/'
+MEDIA_URL = '/home/dScript/taloscope-new/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
