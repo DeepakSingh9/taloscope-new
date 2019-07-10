@@ -482,11 +482,7 @@ margin-left:5px;
 list-style-type:square !important;
 }
 
-.newtextarea{
-border:1px solid !important;
-height:150px important;
 
-}
 
 
 .signup-label{
@@ -497,3 +493,24 @@ color:black !important;
 color:#9e9e9e !important;
 }
 
+.gen-form{
+margin-top:40px;
+padding:20px;
+border:1px solid #bdbdbd;
+background-color:white;
+}
+
+.education-form label{
+color:#424242 !important;
+}
+
+
+.text-form input[type="textarea"]
+{
+height:400px !important;
+background-color:blue;
+}
+
+gen-form::placeholder{
+color:#9e9e9e !important;
+}

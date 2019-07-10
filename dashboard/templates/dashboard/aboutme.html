@@ -2,23 +2,28 @@
 {% block title %}taloscope | add about me{% endblock %}
 {% block content %}
 <div class="container">
-<div class="row">
-      <div class="col center-align"><h4>Add a Summary About You</h4></div>
-          <form class="col s12" method="post" enctype="multipart/form-data">
+    <div class="row">
+    <div class="col s12 " style="margin-top:20px;"> <button class="btn-floating btn-flat waves-effect grey lighten-1" onclick="goBack()"><i class="material-icons">arrow_back</i></button></div>
+        </div>
+<div class="row center-align gen-form">
+      <div class="col s12"><h4>Add a Summary About You</h4></div>
+      <div class="row">
+          <div class="col s12 ">
+          <form class="text-form" method="post" enctype="multipart/form-data">
               {% csrf_token %}
-              <div class="input-field col s11">
+              <div class="input-field col s12 ">
                   <i class="material-icons prefix indigo-text text-darken-4">mode_edit</i>
-                  <textarea name="about_me" rows="10" cols="50" id="id_about_me" class=" newtextarea validate" data-length="150">{{profile.about_me}}</textarea>
+                  <textarea name="about_me" rows="500" cols="200" id="id_about_me" class=" newtextarea validate" data-length="150">{{profile.about_me}}</textarea>
                   {{ form.about_me.label_tag }}
                   {{ form.about_me.errors }}
               </div>
-              <div class="row">
-        <div class="col s12 center-align ">
-            <button style="width:100%;" type="submit" class="waves-effect waves-light btn ">submit</button>
-        </div>
-    </div>
           </form>
+              </div>
+          <div class="col s12 center " style="">
+            <button style="width:80%;" type="submit" class="waves-effect waves-light btn ">Add</button>
+          </div>
       </div>
+    </div>
 </div>
 <script>
 $(document).ready(function() {

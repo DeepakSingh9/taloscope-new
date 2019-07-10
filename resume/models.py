@@ -9,7 +9,7 @@ from dashboard.models import Profile
 class Project(models.Model):
     profile=models.ForeignKey(Profile,on_delete=models.CASCADE,)
     title= models.CharField(max_length=128)
-    year = models.DateField()
+    year = models.DateField(blank=True,null=True)
     description = models.TextField()
     link = models.URLField(blank=True)
     position=models.CharField(max_length=128,blank=True)
@@ -22,10 +22,10 @@ class WorkExperience(models.Model):
     profile=models.ForeignKey(Profile,on_delete=models.CASCADE,)
     organisation=models.CharField(max_length=128,blank=True,)
     designation=models.CharField(max_length=128,blank=True,)
-    worked_from=models.DateField()
-    worked_till=models.DateField(blank=True,null=True,default=datetime.date.today)
+    worked_from=models.DateField(blank=True,null=True)
+    worked_till=models.DateField(blank=True,null=True)
     current=models.BooleanField(default=False)
-    describe=models.TextField(blank=True)
+    describe=models.TextField(blank=True,max_length=250)
 
     def __str__(self):
         return self.organisation

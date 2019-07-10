@@ -8,53 +8,61 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css" integrity="sha256-DOS9W6NR+NFe1fUhEE0PGKY/fubbUCnOfTje2JMDw3Y=" crossorigin="anonymous" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js" integrity="sha256-FEqEelWI3WouFOo2VWP/uJfs1y8KJ++FLh2Lbqc8SJk=" crossorigin="anonymous"></script>
 <div class="container grey-darken-2 ">
-<div class="row" style="padding:30px;margin:10px;">
     <div class="row">
-      <div class="col center-align"><h4>Work Experience</h4></div>
+    <div class="col s12 " style="margin-top:20px;"> <button class="btn-floating btn-flat waves-effect grey lighten-1" onclick="goBack()"><i class="material-icons">arrow_back</i></button></div>
+        </div>
+<div class="row gen-form center-align" style="">
+    <div class="row">
+      <div class="col s12"><h4>Work Experience</h4></div>
         </div>
 <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     <div class="row">
-        <div class="input-field">
+        <div class="input-field col s12">
             <i class="material-icons prefix">location_city</i>
     <label for="id_organisation">Organisation:</label> <input value="{{workex.organisation}}" type="text" name="organisation" maxlength="128" id="id_organisation" />
         </div>
     </div>
      <div class="row">
-        <div class="input-field">
+        <div class="input-field col s12">
             <i class="material-icons prefix">work</i>
     <label for="id_designation">Designation:</label> <input type="text" name="designation" maxlength="128" id="id_designation" value="{{workex.designation}}"/>
         </div>
      </div>
      <div class="row">
-        <div class="input-field">
+        <div class="input-field col s12">
     {{ form.worked_from.errors }}
             <i class="material-icons prefix">date_range</i>
 <label for="id_worked_from">Worked from:</label> <input type="text" name="worked_from" required id="id_worked_from" value="{{workex.worked_from|date:"Y-m-d"}}"/>
         </div>
      </div>
      <div class="row">
-        <div class="input-field">
+        <div class="input-field col s12">
             <i class="material-icons prefix">date_range</i>
-<label for="id_worked_till">Worked Till(select today's date if it is your current organisation):</label> <input type="text" name="worked_till"  id="id_worked_till" value="{{workex.worked_till|date:"Y-m-d"}}"/>
+<label for="id_worked_till">Worked Till(Leave it blank in case of current organisation):</label> <input type="text" name="worked_till"  id="id_worked_till" value="{{workex.worked_till|date:"Y-m-d"}}"/>
         </div>
      </div>
      <div class="row">
-        <div class="">
+        <div class="col s12">
             <i class="material-icons prefix">edit</i>
-<label for="id_describe">Describe Your Work:</label> <textarea class="" name="describe" cols="40" rows="40" id="id_describe" value="">{{workex.describe}}
+<label for="id_describe">Describe Your Work,Roles,Responsibilities,Projects etc in 250 chars:</label> <textarea class="validate" name="describe" cols="40" rows="40" id="id_describe" placeholder="describe your roles ,reponsibilities projects etc"  data-length="250">{{workex.describe}}
 </textarea>
         </div>
      </div>
     <div class="row">
         <div class="col s12 center-align ">
-            <button style="width:100%;" type="submit" class="waves-effect waves-light btn"><i class="material-icons center">file_upload</i>submit</button>
+            <button style="width:100%;" type="submit" class="waves-effect waves-light btn"><i class="material-icons center"></i>Add</button>
         </div>
     </div>
 </form>
 </div>
 </div>
 <script>
+
+ $(document).ready(function() {
+    $('textarea#id_describe').characterCounter();
+  });
+
     $(function () {
       $("#id_worked_from,#id_worked_till").datetimepicker({format: 'Y-m-d',});
     });
