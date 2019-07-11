@@ -43,7 +43,7 @@
                             <div class="" style="">
                     <p class="name" style="">{{user.first_name}}</p>
                     <p class="grey-text text-darken-2 who_are" style="">{{user.profile.description}}</p>
-                                <span class="btn-flat grey lighten-1"><i class="material-icons left">star_border</i>&nbsp;{{user.profile.followed_by.count}}</span>
+                                <span class="btn red lighten-2"><i class="material-icons left">star_border</i>&nbsp;{{user.profile.followed_by.count}}</span>
                                 </div>
                             </div>
                         </div>
@@ -289,7 +289,7 @@ edit about me</a></li>
                         </div>
                         <div class="col s3 outer-column" style="">
                                 {% if each.link %}
-                                <a class="btn waves-effect red lighten-2" href="{{each.link}}"><i class="material-icons right">arrow_forward</i>See project</a>
+                                <a class="btn red lighten-2" href="{{each.link}}"><i class="material-icons right">arrow_forward</i>See project</a>
                                 {% endif %}
                         </div>
                         {% endfor %}

@@ -6,8 +6,12 @@ from django.contrib.auth.models import User
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth import login, logout, authenticate
 from dashboard.models import Profile
-from .forms import LoginForm, RegisterationForm
+from .forms import LoginForm, RegisterationForm,ContactForm
 from django.contrib import messages
+from signup.models import Contact
+from django.conf import settings
+from django.core.mail import send_mail
+
 
 
 # Create your views here.
@@ -66,5 +70,30 @@ def user_registration(request):
 def user_logout(request):
     logout(request)
     return redirect('')
+
+
+def contact(request):
+    if request.method=='POST':
+        name=request.POST['name']
+        sender=request.POST['sender']
+        message=request.POST['message']
+        form=ContactForm(request.POST)
+
+        if form.is_valid():
+            subject='contact form email'
+            from_email=settings.DEFAULT_FROM_EMAIL
+            to_email=[settings.DEFAULT_FROM_EMAIL]
+
+            contact_message="{0},from{1} with email{2}".format(message,name,sender)
+
+            send_mail(subject,contact_message,from_email,to_email)
+            return redirect('contact')
+
+    else:
+        form=ContactForm()
+
+    return render(request,'contact.html',{'form':form})
+
+
 
 

@@ -39,9 +39,9 @@
                     <p class="name" style="">{{user.first_name}}</p>
                     <p class="grey-text text-darken-2 who_are" style="">{{user.profile.description}}</p>
                                 {% if viewer not in profile.followed_by.all %}
-                                <p style=""><a href="{% url 'follow' username=user.username %}" class="btn-flat waves-effect waves-yellow grey lighten-1"><i class="large left material-icons ">star_border</i>&nbsp;{{user.profile.followed_by.count}}</a></p>
+                                <p style=""><a href="{% url 'follow' username=user.username %}" class="btn red lighten-2"><i class="large left material-icons ">star_border</i>&nbsp;{{user.profile.followed_by.count}}</a></p>
                                 {% else %}
-                                <p style="margin-top:-10px !important;"><a href="{% url 'unfollow' username=user.username%}" class="btn-flat waves-effect waves-yellow grey lighten-1"><i class="large left material-icons yellow-text text-accent-2">star</i>&nbsp;{{user.profile.followed_by.count}}</a></p>
+                                <p style="margin-top:-10px !important;"><a href="{% url 'unfollow' username=user.username%}" class="btn  red lighten-2"><i class="large left material-icons yellow-text text-accent-2">star</i>&nbsp;{{user.profile.followed_by.count}}</a></p>
                                 {% endif %}
                                 </div>
                             </div>
@@ -250,7 +250,7 @@
                         </div>
                         <div class="col s3 outer-column" style="">
                                 {% if each.link %}
-                                <a class="btn waves-effect red lighten-2" href="{{each.link}}"><i class="material-icons right">arrow_forward</i>See project</a>
+                                <a class="btn  red lighten-2" href="{{each.link}}"><i class="material-icons right">arrow_forward</i>See project</a>
                                 {% endif %}
                         </div>
                         {% endfor %}

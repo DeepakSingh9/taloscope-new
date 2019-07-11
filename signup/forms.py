@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from dashboard.models import Profile
+from signup.models import  Contact
 
 
 
@@ -19,4 +20,10 @@ class RegisterationForm(forms.ModelForm):
         model=Profile
         fields=('description',)
 
+
+class ContactForm(forms.ModelForm):
+
+    class Meta:
+        model=Contact
+        fields=('sender','name','message')
 
