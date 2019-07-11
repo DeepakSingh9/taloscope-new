@@ -21,7 +21,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
 <body style="background-color:#fafafa;">
-
+<header>
   <nav style="">
     <div class="nav-wrapper main-nav blue-grey darken-4">
         {% if request.user.is_authenticated %}
@@ -58,18 +58,15 @@
         </div>
 
     </nav>
-
-<div class="">
+</header>
+<main>
   {% block content %}
   {% endblock %}
-</div>
-<script>
-</script>
-</body>
+</main>
 <footer class="page-footer grey lighten-4 black-text">
           <div class="container">
             <div class="row">
-              <div class="col l6 s12">
+              <div class="col s12">
                   <p><a href="{% url 'contact' %}">contact us</a></p>
                   <p>© 2014 Copyright taloscope.com</p>
                   <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
@@ -77,5 +74,6 @@
 
             </div>
           </div>
-        </footer>
+</footer>
+</body>
 </html>
