@@ -29,7 +29,7 @@
         <div class="col  center-align s3 z-depth-1 white" style="margin-top:10px;margin-left:20px;">
                 <div class="info">
                     <div class="row">
-                        <div class="col 12 profile-box" style="margin-top:10px;margin-left:80px;">
+                        <div class="col 12 profile-box" style="margin-top:13px;margin-left:25%;">
                             {% if user.profile.profile_image %}
                    <img src="{{user.profile.profile_image.url}}" alt="" class="circle responsive-image" style="height:120px;width:120px;">
                             <a href="{% url 'image_upload' username=user.username %}"><i class="material-icons tiny left"></i>change image</a>
@@ -39,11 +39,11 @@
                             {% endif %}
                             <!-- notice the "circle" class -->
                         </div>
-                        <div class="col s12" style="margin-top:-20px;">
+                        <div class="col s12" style="margin-top:-22px;">
                             <div class="" style="">
-                    <p class="name" style="">{{user.first_name}}</p>
+                    <p class="name" style="">{{user.get_full_name}}</p>
                     <p class="grey-text text-darken-2 who_are" style="">{{user.profile.description}}</p>
-                                <span class="btn red lighten-2"><i class="material-icons left">star_border</i>&nbsp;{{user.profile.followed_by.count}}</span>
+                                <span class="btn red lighten-2" style="width:50%;margin-top:-10px;"><i class="material-icons  center">star_border</i>&nbsp;{{user.profile.followed_by.count}}</span>
                                 </div>
                             </div>
                         </div>
