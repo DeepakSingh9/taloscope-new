@@ -28,8 +28,8 @@
             <!----------------------SIDE PANEL ------------------------------>
         <div class="col  center-align s3 z-depth-1 white" style="margin-top:10px;margin-left:20px;">
                 <div class="info">
-                    <div class="row">
-                        <div class="col 12 profile-box" style="margin-top:10px;margin-left:80px;">
+                    <div class="row center-align">
+                        <div class="col 12 profile-box " style="margin-top:10px;margin-left:80px;">
                             {% if user.profile.profile_image %}
                    <img src="{{user.profile.profile_image.url}}" alt="" class="circle responsive-image" style="height:120px;width:120px;">
                             <a href="{% url 'image_upload' username=user.username %}"><i class="material-icons tiny left"></i>change image</a>
@@ -237,8 +237,8 @@ edit about me</a></li>
                  <div class="" style="margin-left:20px;position:absolute;">
                     <h1>Let Them Take A Note Of You !</h1>
                     <h4>Introduce Yourself</h4>
-                        <a href="{% url 'uploadskills' %}" class="btn waves-effect red lighten-2 " type="submit" name="action">Upload Introduction Video</a>
-                        </div>
+                     <a href="{% url 'uploadskills' %}" class="btn red lighten-2 " type="submit" name="action">Upload Introduction Video</a>
+                 </div>
                     <img style="margin-left:250px;margin-top:140px;hieght:50%;width:50%" class="circle responsive" src="{% static 'images/images/astronaut_home.jpg' %}">
                 {% endif %}
 

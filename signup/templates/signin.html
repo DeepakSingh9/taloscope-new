@@ -1,4 +1,4 @@
-{% extends 'dashboard/base.html' %}
+{% extends 'base.html' %}
 {% load staticfiles %}
 {% block title %}TaloScope{% endblock %}
 {% block content %}
@@ -28,7 +28,7 @@
                 {% csrf_token %}
                 <div class="col s12 input-field">
                     <input type="text" name="username" id="id_username">
-                    <label for="id_username" class="signup-label">username</label>
+                    <label for="id_username" class="">username</label>
                 </div>
                 <div class="col s12 input-field">
                     <input type="password" name="password" id="id_password" class="signup-label">

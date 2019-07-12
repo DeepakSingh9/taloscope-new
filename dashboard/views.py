@@ -106,7 +106,7 @@ def aboutme(request,pk):
             profile.save()
             return redirect('home',username=user.username)
         else:
-            print (form.errors)
+            return HttpResponse (form.errors)
     else:
         form=AboutMeForm()
     return render(request,'dashboard/aboutme.html',{'form':form})
@@ -126,7 +126,7 @@ def edit_aboutme(request,pk):
             profile.save()
             return redirect('home',username=user.username)
         else:
-            form.errors
+            return HttpResponse(form.errors)
     else:
         form=AboutMeForm(instance=profile)
     return render(request,'dashboard/aboutme.html',{'form':form,'profile':profile})

@@ -3,8 +3,9 @@
 {% block content %}
 <div class="container">
     <div class="row">
-    <div class="col s12 " style="margin-top:20px;"> <button class="btn-floating btn-flat waves-effect grey lighten-1" onclick="goBack()"><i class="material-icons">arrow_back</i></button></div>
-        </div>
+    <div class="col s12 " style="margin-top:20px;"> <button class="btn-floating btn-flat waves-effect grey lighten-1" onclick="goBack()"><i class="material-icons">arrow_back</i></button>
+    </div>
+    </div>
 <div class="row center-align gen-form">
       <div class="col s12"><h4>Add a Summary About You</h4></div>
       <div class="row">
@@ -17,13 +18,13 @@
                   {{ form.about_me.label_tag }}
                   {{ form.about_me.errors }}
               </div>
-          </form>
-              </div>
-          <div class="col s12 center " style="">
+              <div class="col s12 center " style="">
             <button style="width:80%;" type="submit" class="waves-effect waves-light btn ">Add</button>
+              </div>
+          </form>
           </div>
-      </div>
-    </div>
+          </div>
+</div>
 </div>
 <script>
 $(document).ready(function() {

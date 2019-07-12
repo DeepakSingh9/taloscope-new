@@ -423,7 +423,7 @@ visibility:visible;
 
 
 .profile-box a{
-  position: absolute;
+  position: relative;
   margin-top:100px;
   margin-left:-114px;
   background-color:black;
@@ -433,7 +433,7 @@ visibility:visible;
 }
 
 .profile-box:hover a{
-  position: absolute;
+  position: relative;
   margin-top:100px;
   margin-left:-114px;
   background-color:black;
