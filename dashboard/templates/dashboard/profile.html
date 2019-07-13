@@ -5,17 +5,17 @@
 {% block content %}
 <!----------------------------------------NAVIGATION ENDS----------------------------------->
     <div class="row full-page">
-        <nav class=" sticky nav-center teal darken-2" style="position:;">
+        <nav class=" sticky nav-center white" style="position:;">
             <div class="nav-wrapper center-align " style="">
                 <ul class=" hide-on-med-down" style="margin-left:150px;">
                  <li class="center">
-                     <a class="" id="home" href="{% url 'home' username=user.username %}"><i class="material-icons left ">cast</i><span>posts</span></a>
+                     <a class="black-text" id="home" href="{% url 'home' username=user.username %}"><i class="material-icons left ">cast</i><span>posts</span></a>
                  </li>
                 <li>
-                    <a href="{% url 'resume' username=profile.user.username %}" class="left-align"><i class="material-icons left ">school</i><span>resume</span></a>
+                    <a href="{% url 'resume' username=profile.user.username %}" class="black-text"><i class="material-icons left ">school</i><span>resume</span></a>
                 </li>
                 <li class="share">
-            <a onclick="copyToClipboard('#p1')" class="share-button" style=""><i class="material-icons left">share</i>share </a>
+            <a onclick="copyToClipboard('#p1')" class="share-button black-text" style=""><i class="material-icons left">share</i>share </a>
                 </li>
                 </ul>
 
@@ -179,12 +179,22 @@
                     <div class="col s12 center-align"></div>
                 </div>
             {% else %}
-                 <div class="" style="margin-left:20px;position:absolute;">
-                    <h1>{{user.username}} HAS'NT ADDED ANYTHING YET !</h1>
-                    <h4>Check {{user.username}}'s Resume</h4>
+                 <div class="row" style="">
+                     <div class="col s12 center-align">
+                    <h2> INTRO COMING SOON !</h2>
+                     </div>
+                     <div class="row center home-center">
+                         <div class="col s12 center-align">
+                             <div class="col s6">
+                         <img style="width:100%;height:100%;" class="responsive" src="{% static 'images/images/star.png' %}">
+                             </div>
+                             <div class="col s6" style="margin-left:-30px !important;">
+                         <img style="width:100%;height:100%;" class="responsive" src="{% static 'images/images/webdev.png' %}">
+                             </div>
+                         </div>
                         <a href="{% url 'resume' username=user.username %}" class="btn waves-effect red lighten-2" type="submit" name="action">Go to Resume</a>
-                        </div>
-                    <img style="margin-left:300px;margin-top:150px;hieght:50%;width:50%" class="circle responsive" src="{% static 'images/images/astronaut_home.jpg' %}">
+                     </div>
+                 </div>
                 {% endif %}
 
          </div>

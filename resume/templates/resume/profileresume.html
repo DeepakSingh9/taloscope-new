@@ -4,17 +4,17 @@
 {% block content %}
 <!----------------------------------------NAVIGATION ENDS----------------------------------->
     <div class="row full-page" style="">
-        <nav class="nav-center sticky teal darken-2" style="position:;">
+        <nav class="nav-center sticky white" style="position:;">
             <div class="nav-wrapper center-align " style="">
                 <ul class=" hide-on-med-down" style="margin-left:150px;">
                  <li class="center">
-                     <a class="" id="home" href="{% url 'home' username=user.username %}"><i class="material-icons left ">cast</i><span>posts</span></a>
+                     <a class="black-text" id="home" href="{% url 'home' username=user.username %}"><i class="material-icons left ">cast</i><span>posts</span></a>
                  </li>
                 <li>
-                    <a href="{% url 'resume' username=profile.user.username %}" class="left-align"><i class="material-icons left ">school</i><span>resume</span></a>
+                    <a href="{% url 'resume' username=profile.user.username %}" class="black-text"><i class="material-icons left ">school</i><span>resume</span></a>
                 </li>
                 <li class="share">
-            <a onclick="copyToClipboard('#p1')" class="share-button" style=""><i class="material-icons left">share</i>share </a>
+            <a onclick="copyToClipboard('#p1')" class="share-button black-text" style=""><i class="material-icons left">share</i>share </a>
                 </li>
                 </ul>
 

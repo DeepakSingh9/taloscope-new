@@ -49,10 +49,10 @@ nav .brand-logo {
 width:80%;
 }
 
-
 nav.nav-center ul {
     text-align: center;
-    font-weight:bold
+    font-weight:bold;
+
 }
 nav.nav-center ul li {
     display: inline;
@@ -60,6 +60,7 @@ nav.nav-center ul li {
 }
 nav.nav-center ul li a {
     display: inline-block;
+    font-color:black !important;
 }
 
 nav.nav-center a:hover{
@@ -142,6 +143,7 @@ margin-top:3px;
 .btn, .btn-large, .btn-small, .btn-floating, .btn-large, .btn-small, .btn-flat{
 font-weight:bold;
 text-transform: none !important;
+background-color: !important;
 }
 
 .skill_col_empty{
@@ -527,3 +529,13 @@ visibility:hidden;
 #main {
     flex: 1 0 auto;
 }
+
+.main-nav{
+color:#3F3D56 !important;
+}
+
+.home-center img {
+  opacity: 0.5;
+  filter: alpha(opacity=50); /* For IE8 and earlier */
+}
+

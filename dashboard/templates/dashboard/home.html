@@ -4,20 +4,20 @@
 {% block content %}
 <!----------------------------------------NAVIGATION ENDS----------------------------------->
     <div class="row full-page">
-        <nav class="nav-center sticky teal darken-3 " style="">
-            <div class="nav-wrapper center-align " style="">
-                <ul class=" hide-on-med-down " style="margin-left:150px">
+        <nav class="nav-center center sticky white" style="">
+            <div class="nav-wrapper center-align" style="">
+                <ul class=" " style="margin-left:150px;">
                  <li class="center">
-                     <a id="home" href="{% url 'home' username=user.username %}"><i class="material-icons left ">cast</i><span>posts</span></a>
+                     <a class="black-text" id="home" href="{% url 'home' username=user.username %}"><i class="material-icons left ">cast</i><span>posts</span></a>
                  </li>
                 <li>
-                    <a  href="{% url 'resume' username=profile.user.username %}" class="left-align"><i class="material-icons left ">school</i><span>resume</span></a>
+                    <a class="black-text" href="{% url 'resume' username=profile.user.username %}"><i class="material-icons left ">school</i><span>resume</span></a>
                 </li>
                 <li class="share">
-            <a onclick="copyToClipboard('#p1')" class="share-button" style=""><i class="material-icons left">share</i>share </a>
+            <a  onclick="copyToClipboard('#p1')" class="share-button black-text" style=""><i class="material-icons left">share</i>share </a>
                 </li>
                 <li class="right">
-                    <a href="{% url 'uploadskills' %}" class=""><i class="material-icons left ">present_to_all</i><span>Upload More Videos</span></a>
+                    <a href="{% url 'uploadskills' %}" class="red-text text-lighten-2"><i class="material-icons left ">present_to_all</i><span>Upload More Videos</span></a>
                 </li>
                 </ul>
 
@@ -230,16 +230,22 @@ edit about me</a></li>
             </div>
             {% endif %}
             {% endfor %}
-                <div class="row">
-                    <div class="col s12 center-align"></div>
-                </div>
             {% else %}
-                 <div class="" style="margin-left:20px;position:absolute;">
-                    <h1>Let Them Take A Note Of You !</h1>
-                    <h4>Introduce Yourself</h4>
-                     <a href="{% url 'uploadskills' %}" class="btn red lighten-2 " type="submit" name="action">Upload Introduction Video</a>
+                 <div class="col s12 home-center" style="">
+                     <div class="row">
+                     <div class="col s12">
+                    <h2>Let Them Take A Note Of You !</h2>
+                     </div>
+                         <div class="col s12 center-align">
+                         <img style="hieght:70%;width:70%;border-radius:50px;" class=" responsive" src="{% static 'images/images/media.png' %}">
+                         </div>
+                         <div class="col s4 " style="margin-left:30%">
+                    <a href="{% url 'uploadskills' %}" class="btn red lighten-2 " type="submit" name="action">Upload Introduction Video</a>
+                         </div>
+                     </div>
+                     </div>
+
                  </div>
-                    <img style="margin-left:250px;margin-top:140px;hieght:50%;width:50%" class="circle responsive" src="{% static 'images/images/astronaut_home.jpg' %}">
                 {% endif %}
 
          </div>
