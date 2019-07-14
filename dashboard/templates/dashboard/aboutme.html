@@ -14,7 +14,7 @@
               {% csrf_token %}
               <div class="input-field col s12 ">
                   <i class="material-icons prefix indigo-text text-darken-4">mode_edit</i>
-                  <textarea name="about_me" rows="500" cols="200" id="id_about_me" class=" newtextarea validate" data-length="150">{{profile.about_me}}</textarea>
+                  <textarea name="about_me" rows="500" cols="200" id="id_about_me" class=" newtextarea validate" data-length="250">{{profile.about_me}}</textarea>
                   {{ form.about_me.label_tag }}
                   {{ form.about_me.errors }}
               </div>
