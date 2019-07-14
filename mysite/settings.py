@@ -20,13 +20,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-sec_file=os.path.join(BASE_DIR, 'jargon.txt')
-with open(sec_file) as f:
-    SECRET_KEY = f.read().strip()
 
+
+SECRET_KEY = 'jt$28cnln1lenjjqsv7asm*^1lx!%^=x*0p2(qt*8_7hr4r1t6'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['www.taloscope.com','dscript.pythonanywhere.com','127.0.0.1']
 
