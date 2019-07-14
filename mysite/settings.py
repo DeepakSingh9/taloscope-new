@@ -141,10 +141,10 @@ SEND_GRID_API_KEY='SG.HtuG9VTzSdqL6D-A_onLpA.Xw4w_mpN-yuIvB4K2aAUHqhrwqhTGXp4CMb
 EMAIL_HOST = 'smtp.sengrid.net' # mail service smtp
 EMAIL_HOST_USER = 'apikey' # email id
 EMAIL_HOST_PASSWORD = SEND_GRID_API_KEY #password
-DEFAULT_FROM_EMAIL='indeepaka@gmail.com'
-ACCOUNT_EMAIL_SUBJECT_PREFIX='TALOSCOPE'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+DEFAULT_FROM_EMAIL = 'indeepaka@gmail.com'
+
 
 
