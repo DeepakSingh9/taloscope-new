@@ -139,7 +139,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 SEND_GRID_API_KEY='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'
 EMAIL_HOST = 'smtp.sengrid.net' # mail service smtp
-EMAIL_HOST_USER = 'taloscope' # email id
+EMAIL_HOST_USER = 'indeepaka@gmail.com' # email id
 EMAIL_HOST_PASSWORD = 'servoflexjack_8' #password
 DEFAULT_FROM_EMAIL='indeepaka@gmail.com'
 ACCOUNT_EMAIL_SUBJECT_PREFIX='TALOSCOPE'
