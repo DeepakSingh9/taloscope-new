@@ -539,3 +539,17 @@ color:#3F3D56 !important;
   filter: alpha(opacity=50); /* For IE8 and earlier */
 }
 
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+main{
+    flex: 1 0 auto;
+}
+
+
+.more-video-button{
+background-color:#e0e0e0 !important;
+border-radius:0px;
+}
